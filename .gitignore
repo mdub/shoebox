@@ -1,6 +1,6 @@
-db/*.sqlite
+db/*.sqlite3
 db/schema.*
 log/*
-tmp/*
+tmp
 public/originals
 public/variants
