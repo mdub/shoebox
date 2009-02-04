@@ -1,0 +1,6 @@
+db/*.sqlite
+db/schema.*
+log/*
+tmp/*
+public/originals
+public/variants
