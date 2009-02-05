@@ -5,6 +5,9 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'spec'
 require 'spec/rails'
 
+fixture_path = RAILS_ROOT + '/spec/fixtures/'
+Test::Unit::TestCase.fixture_path = fixture_path # for fixture_file_upload
+
 Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these
   # lines, delete config/database.yml and disable :active_record
