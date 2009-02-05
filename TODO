@@ -1,6 +1,7 @@
-- View photo original
+✓ View photo original
+- List photos (links to originals)
 - Support upload of a single photo (from web-app)
-- Browse (all) photo thumbnails
+- Includes thumbnails in photo list
 - Support upload of a single photo (from script)
 - Support bulk upload of an entire directory (from script)
 - Support bulk upload of an entire directory (from web-app)
