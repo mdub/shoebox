@@ -1,5 +1,5 @@
 <%- for photo in @photos -%>
-<li>a photo</li>
+<li><%= link_to photo.id, photo.public_filename %></li>
 <%- end -%>
 
 <ul>
