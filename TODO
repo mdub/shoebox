@@ -1,0 +1,10 @@
+- View photo original
+- Support upload of a single photo (from web-app)
+- Browse (all) photo thumbnails
+- Support upload of a single photo (from script)
+- Support bulk upload of an entire directory (from script)
+- Support bulk upload of an entire directory (from web-app)
+- Group photos into albums
+- Group photos into upload sets
+- Maintain order of photos within an album
+- Rotate a photo
