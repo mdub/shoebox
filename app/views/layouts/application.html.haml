@@ -1,0 +1,21 @@
+!!! XML
+!!! Strict
+%html
+  %head
+    %title Snap-Cache
+
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag :defaults
+
+  %body{ :class => RAILS_ENV }
+    #content
+
+      = yield
+
+    #flash.hidden
+      .body
+        .message
+          %p.content
+        .confirm
+          %span.button
+            %a{ :type => "cancel",  :href => "#" } Close
