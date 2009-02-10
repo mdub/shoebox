@@ -1,7 +1,9 @@
 ✓ View photo original
 - List photos (links to originals)
 - Support upload of a single photo (from web-app)
-- Includes thumbnails in photo list
+- Add rcov
+- Convert photo list from links to "snaps"
+- Paginate photo list
 - Support upload of a single photo (from script)
 - Support bulk upload of an entire directory (from script)
 - Support bulk upload of an entire directory (from web-app)
