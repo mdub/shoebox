@@ -16,11 +16,11 @@ end
 
 begin
   require 'spec/rake/spectask'
+  require 'spec/rake/verify_rcov'
+
   Rake.application.instance_variable_get('@tasks').delete('default')
 
-  spec_prereq = File.exist?(File.join(RAILS_ROOT, 'config', 'database.yml')) ? "db:test:prepare" : :noop
-  task :noop do
-  end
+  spec_prereq = "db:test:prepare"
 
   task :default => :spec
   task :stats => "spec:statsetup"
@@ -32,14 +32,20 @@ begin
   end
 
   namespace :spec do
+    
     desc "Run all specs in spec directory with RCov (excluding plugin specs)"
-    Spec::Rake::SpecTask.new(:rcov) do |t|
+    Spec::Rake::SpecTask.new(:with_rcov) do |t|
       t.spec_opts = ['--options', "\"#{RAILS_ROOT}/spec/spec.opts\""]
       t.spec_files = FileList['spec/**/*/*_spec.rb']
       t.rcov = true
       t.rcov_opts = lambda do
         IO.readlines("#{RAILS_ROOT}/spec/rcov.opts").map {|l| l.chomp.split " "}.flatten
       end
+    end
+
+    RCov::VerifyTask.new(:covered => :with_rcov) do |t|
+      t.threshold = 99.9
+      t.require_exact_threshold = false
     end
 
     desc "Print Specdoc for all specs (excluding plugin specs)"

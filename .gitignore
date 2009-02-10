@@ -3,3 +3,4 @@ db/schema.*
 log/*
 tmp
 public/var
+coverage
