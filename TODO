@@ -1,7 +1,7 @@
 ✓ View photo original
 ✓ List photos (links to originals)
-- Add rcov
-- Support upload of a single photo (from web-app)
+✓ Add rcov
+✓ Support upload of a single photo (from web-app)
 - Convert photo list from links to "snaps"
 - Paginate photo list
 - Support upload of a single photo (from script)
