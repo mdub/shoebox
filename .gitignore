@@ -3,4 +3,5 @@ db/schema.*
 log/*
 tmp
 public/var
+public/photos
 coverage
