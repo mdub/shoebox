@@ -1,7 +1,7 @@
 %ul
   - for photo in @photos
     %li
-      = link_to photo.id, photo.public_filename
+      = link_to photo.id, photo_path(photo)
 
 %ul
   %li
