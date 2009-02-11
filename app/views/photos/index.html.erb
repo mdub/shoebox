@@ -1,9 +1,0 @@
-<ul>
-<%- for photo in @photos -%>
-<li><%= link_to photo.id, photo.public_filename %></li>
-<%- end -%>
-</ul>
-
-<ul>
-<li><%= link_to("Upload a new photo", new_photo_path) %></li>
-</ul>
