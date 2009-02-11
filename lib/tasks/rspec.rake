@@ -44,7 +44,7 @@ begin
     end
 
     RCov::VerifyTask.new(:covered => :with_rcov) do |t|
-      t.threshold = 99.9
+      t.threshold = 100
       t.require_exact_threshold = false
     end
 

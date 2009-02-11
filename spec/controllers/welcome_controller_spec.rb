@@ -2,9 +2,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe WelcomeController do
 
-  #Delete this example and add some real ones
-  it "should use WelcomeController" do
-    controller.should be_an_instance_of(WelcomeController)
+  describe "#index" do
+
+    it "should redirect to photos" do
+      get :index
+      response.should redirect_to(photos_path)
+    end
+
   end
 
 end
