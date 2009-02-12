@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe SnapsController do
+describe VariantsController do
 
   describe "#show" do
     
@@ -15,10 +15,18 @@ describe SnapsController do
       stub(request).path { request_path }
       
       expected_filename = File.join(Rails.public_path, request_path)
-      mock(@photo).create_thumbnail(expected_filename, 800)
+
+      image = "image"
+      mock(@photo).with_image { |block| block.call(image) }
+
+      thumb = "thumbnail"
+      mock(image).thumbnail(800) { |size, block| block.call(thumb) }
+      
+      mock(thumb).save(expected_filename)
+
       mock(controller).send_file(expected_filename, :disposition => "inline", :type => "image/jpeg")
       
-      get :show, :photo_id => "123", :format => "jpg"
+      get :show, :photo_id => "123", :id => "800", :format => "jpg"
       
       response.content_type.should == "image/jpeg"
       
