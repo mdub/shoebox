@@ -11,4 +11,13 @@ class Photo < ActiveRecord::Base
 
   validates_as_attachment
 
+  def create_thumbnail(filename, size)
+    ImageScience.with_image full_filename do |img|
+      img.thumbnail(size) do |thumbnail|
+        FileUtils.mkpath(File.dirname(filename))
+        thumbnail.save(filename)
+      end
+    end
+  end
+
 end
