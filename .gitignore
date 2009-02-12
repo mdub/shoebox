@@ -5,3 +5,4 @@ tmp
 public/var
 public/photos
 coverage
+public/stylesheets/*.css
