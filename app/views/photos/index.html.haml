@@ -1,7 +1,7 @@
 %ul
   - for photo in @photos
     %li
-      = link_to photo.id, photo_path(photo)
+      = link_to(image_tag(photo_thumb_path(photo)), photo_path(photo))
 
 %ul
   %li

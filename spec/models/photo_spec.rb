@@ -15,4 +15,5 @@ describe Photo do
     end
 
   end
+
 end
