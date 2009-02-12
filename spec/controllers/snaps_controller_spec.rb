@@ -11,8 +11,12 @@ describe SnapsController do
     
     it "serves a scaled down image" do
       
-      mock(@photo).create_thumbnail(anything, 800)
-      mock(controller).send_file(anything, :disposition => "inline", :type => "image/jpeg")
+      request_path = "/photos/123/snap.jpg"
+      stub(request).path { request_path }
+      
+      expected_filename = File.join(Rails.public_path, request_path)
+      mock(@photo).create_thumbnail(expected_filename, 800)
+      mock(controller).send_file(expected_filename, :disposition => "inline", :type => "image/jpeg")
       
       get :show, :photo_id => "123", :format => "jpg"
       
