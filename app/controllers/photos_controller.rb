@@ -4,4 +4,8 @@ class PhotosController < ApplicationController
     actions :index, :new, :create, :show
   end
   
+  def current_objects
+    Photo.paginate(:all, :page => params[:page])
+  end
+  
 end

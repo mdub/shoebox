@@ -1,4 +1,7 @@
-%ul
+.pagination
+  = will_paginate @photos
+
+%ul.photos
   - for photo in @photos
     %li
       = link_to(image_tag(photo_thumb_path(photo)), photo_path(photo))

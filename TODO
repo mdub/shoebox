@@ -4,9 +4,11 @@
 ✓ Support upload of a single photo (from web-app)
 ✓ Show "snaps" on photo view page
 ✓ Convert photo list from links to "thumbs"
-- Paginate photo list
+✓ Paginate photo list
 - Support upload of a single photo (from script)
 - Support bulk upload of an entire directory (from script)
+- Add prev/next buttons to the photo page
+- Support keyboard shortcuts for prev/next
 - Extract date info from EXIF header
 - Sort photos by date
 - Add editable field

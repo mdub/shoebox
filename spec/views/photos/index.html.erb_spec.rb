@@ -9,7 +9,7 @@ describe "photos/index" do
         mock_model(Photo, :public_filename => "/photos/a"),
         mock_model(Photo, :public_filename => "/photos/b"),
         mock_model(Photo, :public_filename => "/photos/c")
-      ]
+      ].paginate(:page => 1)
     end
 
     it "should include links to each photo" do
