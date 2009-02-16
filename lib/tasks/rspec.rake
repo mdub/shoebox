@@ -19,10 +19,10 @@ begin
   require 'spec/rake/verify_rcov'
 
   Rake.application.instance_variable_get('@tasks').delete('default')
+  task :default => "spec:covered"
 
   spec_prereq = "db:test:prepare"
 
-  task :default => :spec
   task :stats => "spec:statsetup"
 
   desc "Run all specs in spec directory (excluding plugin specs)"
