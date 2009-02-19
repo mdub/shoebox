@@ -20,4 +20,12 @@ class Photo < ActiveRecord::Base
     photo
   end
 
+  def prev_id
+    id - 1
+  end
+
+  def next_id
+    id + 1
+  end
+  
 end

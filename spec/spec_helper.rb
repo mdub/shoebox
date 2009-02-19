@@ -17,3 +17,7 @@ Spec::Runner.configure do |config|
   config.mock_with :rr
 
 end
+
+def image_fixture_file(name)
+  "#{Rails.root}/spec/fixtures/images/#{name}"
+end
