@@ -11,4 +11,13 @@ class Photo < ActiveRecord::Base
 
   validates_as_attachment
 
+  def self.from_file(filename)
+    photo = self.new
+    content_type = if filename =~ /\.(\w+)$/
+      Mime::Type.lookup_by_extension($1).to_s
+    end
+    photo.uploaded_data = ActionController::TestUploadedFile.new(filename, content_type, true)
+    photo
+  end
+
 end
