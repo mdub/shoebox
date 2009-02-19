@@ -13,7 +13,28 @@ describe Photo do
       image_file_path = "#{RAILS_ROOT}/public#{@photo.public_filename}"
       Pathname(image_file_path).should exist
     end
+    
+  end
 
+  describe ".from_file" do
+    
+    before(:all) do
+      @photo = Photo.from_file("#{Rails.root}/spec/fixtures/images/jonah-with-tractor.jpg")
+    end
+
+    it "derives the content_type" do
+      @photo.content_type.should == "image/jpeg"
+    end
+
+    it "derives the filename" do
+      @photo.filename.should == "jonah-with-tractor.jpg"
+    end
+    
+    it "is in a savable state" do
+      @photo.save
+      @photo.errors.should be_empty
+    end
+    
   end
 
 end
