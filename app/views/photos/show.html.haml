@@ -1,1 +1,3 @@
-= image_tag(photo_snap_path(@photo))
+= photo_link(@photo.prev_id)
+= photo_snap(@photo)
+= photo_link(@photo.next_id)
