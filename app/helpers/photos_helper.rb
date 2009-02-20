@@ -1,7 +1,7 @@
 module PhotosHelper
 
   def photo_snap_path(photo)
-    formatted_photo_variant_path(photo, "800", "jpg")
+    formatted_photo_variant_path(photo, "600", "jpg")
   end
 
   def photo_snap(photo)

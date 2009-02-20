@@ -8,8 +8,8 @@ describe PhotosHelper do
   
   describe "#photo_snap_path" do
     
-    it "scales down to fit 800x800" do
-      mock(helper).formatted_photo_variant_path(@photo, "800", "jpg")
+    it "scales down to fit 600x600" do
+      mock(helper).formatted_photo_variant_path(@photo, "600", "jpg")
       helper.photo_snap_path(@photo)
     end
     
