@@ -13,7 +13,7 @@ module PhotosHelper
   end
 
   def photo_thumb(photo)
-    image_tag(photo_thumb_path(photo))
+    image_tag(photo_thumb_path(photo), :class =>"thumb")
   end
 
   def photo_link(photo)

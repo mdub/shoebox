@@ -3,7 +3,7 @@
 
 %ul.photos
   - for photo in @photos
-    %li
+    %li{ :id => dom_id(photo) }
       = photo_link(photo)
 
 %ul

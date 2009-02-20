@@ -20,7 +20,13 @@ describe "photos/show" do
 
   it "links to the previous photo" do
     response.should have_tag("a[href=?]", "/photos/23") do
-      with_tag("img[src=?]", "/photos/23/thumb\.jpg")
+      with_tag("img.thumb[src=?]", "/photos/23/thumb\.jpg")
+    end
+  end
+
+  it "links to the next photo" do
+    response.should have_tag("a[href=?]", "/photos/32") do
+      with_tag("img.thumb[src=?]", "/photos/32/thumb\.jpg")
     end
   end
 
