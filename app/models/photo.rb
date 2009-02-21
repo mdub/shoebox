@@ -14,6 +14,8 @@ class Photo < ActiveRecord::Base
   validates_as_attachment
   
   before_validation :set_sha1_digest_from_temp_data
+  
+  validates_uniqueness_of :sha1_digest, :message => "duplicates an existing photo"
 
   def self.from_file(filename)
     photo = self.new
