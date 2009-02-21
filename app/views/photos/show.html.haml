@@ -1,8 +1,8 @@
 .controls
   %span.prev
-    = photo_link(@photo.prev_id)
+    = photo_link(@photo.previous)
   %span.next
-    = photo_link(@photo.next_id)
+    = photo_link(@photo.next)
 
 %p.centered
   = photo_snap(@photo)

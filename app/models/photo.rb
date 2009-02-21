@@ -26,12 +26,12 @@ class Photo < ActiveRecord::Base
     photo
   end
 
-  def prev_id
-    id - 1
+  def previous
+    self.class.find_by_id(id - 1)
   end
-
-  def next_id
-    id + 1
+  
+  def next
+    self.class.find_by_id(id + 1)
   end
 
   protected

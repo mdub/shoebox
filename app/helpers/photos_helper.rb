@@ -17,7 +17,7 @@ module PhotosHelper
   end
 
   def photo_link(photo)
-    link_to(photo_thumb(photo), photo_path(photo))
+    link_to(photo_thumb(photo), photo_path(photo)) if photo
   end
 
 end

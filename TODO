@@ -7,7 +7,7 @@
 ✓ Paginate photo list
 ✓ Support upload of a single photo (from script)
 ✓ Add prev/next buttons to the photo page
-- Avoid import of duplicates
+✓ Avoid import of duplicates
 - Support bulk upload of an entire directory (from script)
 - Support keyboard shortcuts for prev/next
 - Extract date info from EXIF header

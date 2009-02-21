@@ -73,18 +73,26 @@ describe Photo do
 
     describe "member" do
 
-      describe "#prev_id" do
+      describe "#previous" do
 
-        it "returns the id of the previous photo" do
-          @photos[1].prev_id.should == @photos[0].id
+        it "returns the previous photo" do
+          @photos[1].previous.should == @photos[0]
         end
 
+        it "returns nil if there's no previous photo" do
+          @photos[0].previous.should == nil
+        end
+        
       end
 
-      describe "#next_id" do
+      describe "#next" do
 
-        it "returns the id of the next photo" do
-          @photos[1].next_id.should == @photos[2].id
+        it "returns the next photo" do
+          @photos[1].next.should == @photos[2]
+        end
+
+        it "returns nil if there's no next photo" do
+          @photos[2].next.should == nil
         end
 
       end
