@@ -15,7 +15,7 @@ describe Photo do
       image_file_path = "#{RAILS_ROOT}/public#{@photo.public_filename}"
       Pathname(image_file_path).should exist
     end
-
+    
   end
 
   describe ".from_file" do
@@ -39,15 +39,30 @@ describe Photo do
     
   end
 
+  describe "#sha1_digest" do
+
+    before do
+      @photo = Photo.from_file(image_fixture_file("ngara-on-train.jpg"))
+    end
+
+    it "starts empty" do
+      @photo.sha1_digest.should == nil
+    end
+    
+    it "is derived on save" do
+      @photo.save.should be_true
+      @photo.sha1_digest.should =~ /^[0-9a-f]{40}$/
+    end
+    
+  end
+  
   describe "collection" do
 
     before do
-      @photos = (1..3).map do 
-        returning(photo = Photo.from_file(image_fixture_file("date.png"))) do
-          photo.save!
-          photo.reload
-        end
-      end
+      Photo.from_file(image_fixture_file("finder.png")).save!
+      Photo.from_file(image_fixture_file("safari.png")).save!
+      Photo.from_file(image_fixture_file("date.png")).save!
+      @photos = Photo.all
     end
 
     describe "member" do

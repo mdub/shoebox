@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 class Photo < ActiveRecord::Base
 
   has_attachment(
@@ -10,6 +12,8 @@ class Photo < ActiveRecord::Base
   )
 
   validates_as_attachment
+  
+  before_validation :set_sha1_digest_from_temp_data
 
   def self.from_file(filename)
     photo = self.new
@@ -26,6 +30,14 @@ class Photo < ActiveRecord::Base
 
   def next_id
     id + 1
+  end
+
+  protected
+  
+  def set_sha1_digest_from_temp_data
+    if save_attachment?
+      self.sha1_digest = Digest::SHA1.hexdigest(temp_data)
+    end
   end
   
 end
