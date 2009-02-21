@@ -1,11 +1,11 @@
 .pagination
   = will_paginate @photos
 
-%ul.photos
+%ul.photos.grid
   - for photo in @photos
-    %li{ :id => dom_id(photo) }
-      = photo_link(photo)
+    %li.thumb{ :id => dom_id(photo) }
+      .frame
+        = photo_link(photo)
 
-%ul
-  %li
-    = link_to("Upload a new photo", new_photo_path)
+#sidebar
+  = link_to("Upload a new photo", new_photo_path)
