@@ -8,15 +8,17 @@
 ✓ Support upload of a single photo (from script)
 ✓ Add prev/next buttons to the photo page
 ✓ Avoid import of duplicates
-- Support bulk upload of an entire directory (from script)
 - Support keyboard shortcuts for prev/next
+- Add editable field
+- AJAX-enabled "browse" view
 - Extract date info from EXIF header
 - Sort photos by date
-- Add editable field
+- Support bulk upload of an entire directory (from script)
 - Support bulk upload of an entire directory (from web-app)
-- Group photos into albums
-- Group photos into upload sets
 - Ensure EXIF info is retaining in downscaled images
-- Maintain order of photos within an album
 - Write comment into EXIF comment field
 - Rotate a photo
+- Add a timeline
+- Easy upload to Flickr
+- Group photos into albums
+- Maintain order of photos within an album
