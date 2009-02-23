@@ -5,7 +5,7 @@
     %title Snap-Cache
 
     = stylesheet_link_tag "application", :media => "all"
-    = javascript_include_tag "jquery"
+    = javascript_include_tag "jquery", "application"
     = yield :head
 
   %body{ :class => RAILS_ENV }

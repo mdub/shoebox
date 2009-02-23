@@ -16,8 +16,8 @@ module PhotosHelper
     image_tag(photo_thumb_path(photo), :class =>"thumb")
   end
 
-  def photo_link(photo)
-    link_to(photo_thumb(photo), photo_path(photo)) if photo
+  def photo_link(photo, html_options = {})
+    link_to(photo_thumb(photo), photo_path(photo), html_options) if photo
   end
 
 end
