@@ -8,7 +8,7 @@
 ✓ Support upload of a single photo (from script)
 ✓ Add prev/next buttons to the photo page
 ✓ Avoid import of duplicates
-- Support keyboard shortcuts for prev/next
+✓ Support keyboard shortcuts for prev/next
 - Add editable field
 - AJAX-enabled "browse" view
 - Extract date info from EXIF header
