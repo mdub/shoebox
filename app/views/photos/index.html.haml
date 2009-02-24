@@ -4,8 +4,7 @@
 %ul.photos.grid
   - for photo in @photos
     %li.thumb{ :id => dom_id(photo) }
-      .frame
-        = photo_link(photo)
+      = photo_link(photo)
 
 #sidebar
   = link_to("Upload a new photo", new_photo_path)

@@ -9,7 +9,7 @@ module PhotosHelper
   end
   
   def photo_thumb_path(photo)
-    formatted_photo_variant_path(photo, "150", "jpg")
+    formatted_photo_variant_path(photo, "100c", "jpg")
   end
 
   def photo_thumb(photo)

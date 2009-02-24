@@ -9,6 +9,7 @@
 ✓ Add prev/next buttons to the photo page
 ✓ Avoid import of duplicates
 ✓ Support keyboard shortcuts for prev/next
+✓ Square thumbnails
 - Add editable field
 - AJAX-enabled "browse" view
 - Extract date info from EXIF header

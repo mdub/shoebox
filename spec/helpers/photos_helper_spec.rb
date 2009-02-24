@@ -17,8 +17,8 @@ describe PhotosHelper do
   
   describe "#photo_thumb_path" do
     
-    it "scales down to fit 150x150" do
-      mock(helper).formatted_photo_variant_path(@photo, "150", "jpg")
+    it "crops and scales to fit 100x100" do
+      mock(helper).formatted_photo_variant_path(@photo, "100c", "jpg")
       helper.photo_thumb_path(@photo)
     end
     

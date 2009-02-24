@@ -4,14 +4,13 @@ class VariantsController < ApplicationController
 
   session :off
 
+  before_filter :find_photo, :only => [:show]
+  
   def show
-    find_photo
-    rescale
+    generate_variant
     respond_to do |format|
       format.jpg do
-        content_type = Mime::Type.lookup_by_extension(params[:format]).to_s
-        logger.info("format #{params[:format].to_sym} type #{content_type}")
-        send_file(@rescaled_filename, :type => content_type, :disposition => 'inline')
+        send_file(@variant_file_name, :type => "image/jpeg", :disposition => 'inline')
       end
     end
   end
@@ -19,18 +18,24 @@ class VariantsController < ApplicationController
   private
   
   def find_photo
-    @photo = Photo.find(params[:photo_id])
+    @photo = Photo.find_by_id(params[:photo_id]) || head(:status =>:not_found)
   end
   
-  def rescale
-    size = params[:id].to_i
-    @rescaled_filename = File.join(Rails.public_path, request.path)
+  def generate_variant
+    @variant_file_name = File.join(Rails.public_path, request.path)
+    FileUtils.mkpath(File.dirname(@variant_file_name))
 
-    FileUtils.mkpath(File.dirname(@rescaled_filename))
+    variant_key = params[:id]
+    op = case variant_key 
+    when /^(\d+)$/
+      [:thumbnail, $1.to_i]
+    when /^(\d+)c$/
+      [:cropped_thumbnail, $1.to_i]
+    end
     
     @photo.with_image do |original|
-      original.thumbnail(size) do |thumbnail|
-        thumbnail.save(@rescaled_filename)
+      original.send(*op) do |variant|
+        variant.save(@variant_file_name)
       end
     end
 
