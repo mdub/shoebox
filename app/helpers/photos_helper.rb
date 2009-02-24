@@ -4,16 +4,20 @@ module PhotosHelper
     formatted_photo_variant_path(photo, "600", "jpg")
   end
 
-  def photo_snap(photo)
-    image_tag(photo_snap_path(photo))
-  end
-  
   def photo_thumb_path(photo)
     formatted_photo_variant_path(photo, "100c", "jpg")
   end
 
   def photo_thumb(photo)
-    image_tag(photo_thumb_path(photo), :class =>"thumb")
+    photo_image(photo, :thumb)
+  end
+
+  def photo_snap(photo)
+    photo_image(photo, :snap)
+  end
+  
+  def photo_image(photo, type)
+    image_tag(send("photo_#{type}_path", photo), :class => type.to_s, :title => photo.description)
   end
 
   def photo_link(photo, html_options = {})
