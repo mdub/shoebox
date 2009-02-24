@@ -13,7 +13,7 @@ class Photo < ActiveRecord::Base
 
   validates_as_attachment
   
-  before_validation :set_sha1_digest_from_temp_data
+  before_validation :extract_details_from_original
   
   validates_uniqueness_of :sha1_digest, :message => "duplicates an existing photo"
 
@@ -36,9 +36,11 @@ class Photo < ActiveRecord::Base
 
   protected
   
-  def set_sha1_digest_from_temp_data
-    if save_attachment?
-      self.sha1_digest = Digest::SHA1.hexdigest(temp_data)
+  def extract_details_from_original
+    return false unless save_attachment?
+    self.sha1_digest = Digest::SHA1.hexdigest(temp_data)
+    if content_type == "image/jpeg"
+      self.timestamp = EXIFR::JPEG.new(temp_path).date_time
     end
   end
   

@@ -62,6 +62,24 @@ describe Photo do
     
   end
   
+  describe "#timestamp" do
+
+    before do
+      ENV['TZ'] = "UTC"
+      @photo = Photo.from_file(image_fixture_file("ngara-on-train.jpg"))
+    end
+
+    it "starts empty" do
+      @photo.timestamp.should == nil
+    end
+    
+    it "is derived on save" do
+      @photo.save.should be_true
+      @photo.timestamp.should == Time.utc(2008, 1, 13, 15, 4, 42)
+    end
+    
+  end
+  
   describe "collection" do
 
     before do
