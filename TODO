@@ -10,8 +10,7 @@
 ✓ Avoid import of duplicates
 ✓ Support keyboard shortcuts for prev/next
 ✓ Square thumbnails
-- Add editable field
-- AJAX-enabled "browse" view
+✓ Add editable field
 - Extract date info from EXIF header
 - Sort photos by date
 - Support bulk upload of an entire directory (from script)
