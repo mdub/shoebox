@@ -9,7 +9,7 @@ describe PhotosController do
       stub(controller).params do 
         { :page => 3 }
       end
-      mock(Photo).paginate(:all, :page => 3) do
+      mock(Photo).paginate(:page => 3) do
         @paginated_photos
       end
       controller.send(:current_objects).should == @paginated_photos

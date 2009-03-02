@@ -17,6 +17,9 @@ class Photo < ActiveRecord::Base
   
   validates_uniqueness_of :sha1_digest, :message => "duplicates an existing photo"
 
+  named_scope :by_timestamp, :order => "timestamp, id"
+  named_scope :by_timestamp_desc, :order => "timestamp desc, id desc"
+  
   def self.from_file(filename)
     photo = self.new
     content_type = if filename =~ /\.(\w+)$/
@@ -25,13 +28,13 @@ class Photo < ActiveRecord::Base
     photo.uploaded_data = ActionController::TestUploadedFile.new(filename, content_type, true)
     photo
   end
-
+  
   def previous
-    self.class.find_by_id(id - 1)
+    self.class.by_timestamp_desc.find(:first, :conditions => ["timestamp < ?", timestamp])
   end
   
   def next
-    self.class.find_by_id(id + 1)
+    self.class.by_timestamp.find(:first, :conditions => ["timestamp > ?", timestamp])
   end
 
   protected

@@ -82,10 +82,16 @@ describe Photo do
   
   describe "collection" do
 
+    def load_image(name, options = {})
+      photo = Photo.from_file(image_fixture_file(name))
+      photo.attributes = options
+      photo.save!
+    end
+    
     before do
-      Photo.from_file(image_fixture_file("finder.png")).save!
-      Photo.from_file(image_fixture_file("safari.png")).save!
-      Photo.from_file(image_fixture_file("date.png")).save!
+      load_image "finder.png", :timestamp => 5.minutes.ago
+      load_image "safari.png", :timestamp => 4.minutes.ago
+      load_image "date.png", :timestamp => 3.minutes.ago
       @photos = Photo.all
     end
 
