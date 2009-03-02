@@ -18,7 +18,20 @@ class Photo < ActiveRecord::Base
   validates_uniqueness_of :sha1_digest, :message => "duplicates an existing photo"
 
   named_scope :by_timestamp, :order => "timestamp, id"
-  named_scope :by_timestamp_desc, :order => "timestamp desc, id desc"
+ 
+  named_scope :before, lambda { |timestamp|
+    {
+      :order =>"timestamp DESC, id DESC",
+      :conditions => ["timestamp < ?", timestamp]
+    }
+  }
+
+  named_scope :after, lambda { |timestamp|
+    {
+      :order =>"timestamp, id",
+      :conditions => ["timestamp > ?", timestamp]
+    }
+  }
   
   def self.from_file(filename)
     photo = self.new
@@ -29,12 +42,20 @@ class Photo < ActiveRecord::Base
     photo
   end
   
+  def prior
+    self.class.before(timestamp)
+  end
+  
   def previous
-    self.class.by_timestamp_desc.find(:first, :conditions => ["timestamp < ?", timestamp])
+    prior.first
+  end
+
+  def subsequent
+    self.class.after(timestamp)
   end
   
   def next
-    self.class.by_timestamp.find(:first, :conditions => ["timestamp > ?", timestamp])
+    subsequent.first
   end
 
   protected

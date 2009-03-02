@@ -1,6 +1,10 @@
 .controls
-  = photo_link(@photo.previous, :id => "prev")
-  = photo_link(@photo.next, :id => "next")
+  %ul#prev
+    - for p in @prior_photos
+      %li= photo_link(p)
+  %ul#next
+    - for p in @subsequent_photos
+      %li= photo_link(p)
 
 .centered
   %p

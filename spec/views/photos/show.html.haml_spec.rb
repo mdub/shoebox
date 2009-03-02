@@ -4,9 +4,9 @@ describe "photos/show" do
 
   before do
     @photo = stub_model(Photo, :id => 25)
-    stub(@photo).previous { stub_model(Photo, :id => 23) }
-    stub(@photo).next { stub_model(Photo, :id => 32) }
     assigns[:photo] = @photo
+    assigns[:prior_photos] = [stub_model(Photo, :id => 23)]
+    assigns[:subsequent_photos] = [stub_model(Photo, :id => 32) ]
     stub(template).photo_snap_path do |photo|
       "/photos/#{photo.id}/snap.jpg"
     end
