@@ -86,13 +86,13 @@ describe Photo do
       photo = Photo.from_file(image_fixture_file(name))
       photo.attributes = options
       photo.save!
+      photo
     end
     
     before do
-      load_image "finder.png", :timestamp => 5.minutes.ago
-      load_image "safari.png", :timestamp => 4.minutes.ago
-      load_image "date.png", :timestamp => 3.minutes.ago
-      @photos = Photo.all
+      @yesterday = load_image "safari.png", :timestamp => 1.day.ago
+      @last_month = load_image "finder.png", :timestamp => 1.month.ago
+      @today = load_image "date.png", :timestamp => 3.minutes.ago
     end
 
     describe "member" do
@@ -100,11 +100,11 @@ describe Photo do
       describe "#previous" do
 
         it "returns the previous photo" do
-          @photos[1].previous.should == @photos[0]
+          @yesterday.previous.should == @last_month
         end
 
         it "returns nil if there's no previous photo" do
-          @photos[0].previous.should == nil
+          @last_month.previous.should == nil
         end
         
       end
@@ -112,11 +112,11 @@ describe Photo do
       describe "#next" do
 
         it "returns the next photo" do
-          @photos[1].next.should == @photos[2]
+          @yesterday.next.should == @today
         end
 
         it "returns nil if there's no next photo" do
-          @photos[2].next.should == nil
+          @today.next.should == nil
         end
 
       end

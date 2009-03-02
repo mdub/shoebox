@@ -11,9 +11,10 @@
 ✓ Support keyboard shortcuts for prev/next
 ✓ Square thumbnails
 ✓ Add editable field
-- Extract date info from EXIF header
-- Sort photos by date
+✓ Extract date info from EXIF header
+✓ Sort photos by date
 - Support bulk upload of an entire directory (from script)
+- Option to archive uploaded photos
 - Support bulk upload of an entire directory (from web-app)
 - Ensure EXIF info is retaining in downscaled images
 - Write comment into EXIF comment field
