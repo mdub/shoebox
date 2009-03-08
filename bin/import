@@ -1,11 +1,9 @@
 #!/usr/bin/env ruby
 require File.dirname(__FILE__) + '/../config/boot'
-require 'environment'
-require 'action_controller/test_process'
 
-ARGV.each do |filename|
-  photo = Photo.from_file(filename)
-  photo.save!
-  photo.reload
-  puts "imported photo##{photo.id} from #{filename}"
-end
+require 'environment'
+require 'importer'
+
+importer = Importer.new
+
+importer.import(ARGV)

@@ -13,6 +13,7 @@ module Resourceful
     # The controller in the examples is FoosController,
     # and the id for single-object actions is 12.
     module Actions
+      
       # GET /foos
       def index
         #load_objects

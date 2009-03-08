@@ -57,7 +57,7 @@ describe Photo do
     it "must be unique" do
       Photo.from_file(image_fixture_file("ngara-on-train.jpg")).save!
       @photo.save.should be_false
-      @photo.errors_on(:sha1_digest).should include("duplicates an existing photo")
+      @photo.errors_on(:sha1_digest).to_s.should =~ /duplicate/
     end
     
   end

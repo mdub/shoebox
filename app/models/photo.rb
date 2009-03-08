@@ -1,3 +1,4 @@
+require 'action_controller/test_process'
 require 'digest/sha1'
 
 class Photo < ActiveRecord::Base
@@ -15,7 +16,7 @@ class Photo < ActiveRecord::Base
   
   before_validation :extract_details_from_original
   
-  validates_uniqueness_of :sha1_digest, :message => "duplicates an existing photo"
+  validates_uniqueness_of :sha1_digest, :message => "is not unique (duplicate?)"
 
   named_scope :by_timestamp, :order => "timestamp, id"
  
