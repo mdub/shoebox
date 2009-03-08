@@ -16,7 +16,7 @@ class Photo < ActiveRecord::Base
   
   before_validation :extract_details_from_original
   
-  validates_uniqueness_of :sha1_digest, :message => "is not unique (duplicate?)"
+  validates_uniqueness_of :sha1_digest, :message => "is not unique; looks like this is a duplicate"
 
   named_scope :by_timestamp, :order => "timestamp, id"
  
