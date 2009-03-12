@@ -11,9 +11,6 @@ Spec::Runner.configure do |config|
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
 
-  # TODO: remove?
-  Test::Unit::TestCase.fixture_path = config.fixture_path # for fixture_file_upload
-
   config.mock_with :rr
 
 end

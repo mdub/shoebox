@@ -7,7 +7,8 @@ describe Photo do
   describe "- uploaded" do
 
     before do
-      @photo = Photo.create!(:uploaded_data => fixture_file_upload("images/ngara-on-train.jpg", "image/jpeg"))
+      upload = ActionController::TestUploadedFile.new("#{fixture_path}/images/ngara-on-train.jpg", "image/jpeg")
+      @photo = Photo.create!(:uploaded_data => upload)
     end
 
     it "is stored in /public/var/test/photos" do

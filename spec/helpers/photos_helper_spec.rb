@@ -9,7 +9,7 @@ describe PhotosHelper do
   describe "#photo_snap_path" do
     
     it "scales down to fit 600x600" do
-      mock(helper).formatted_photo_variant_path(@photo, "600", "jpg")
+      mock(helper).photo_variant_path(@photo, "600", :format => "jpg")
       helper.photo_snap_path(@photo)
     end
     
@@ -18,7 +18,7 @@ describe PhotosHelper do
   describe "#photo_thumb_path" do
     
     it "crops and scales to fit 100x100" do
-      mock(helper).formatted_photo_variant_path(@photo, "100c", "jpg")
+      mock(helper).photo_variant_path(@photo, "100c", :format => "jpg")
       helper.photo_thumb_path(@photo)
     end
     

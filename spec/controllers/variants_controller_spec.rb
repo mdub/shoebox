@@ -18,7 +18,7 @@ describe VariantsController do
         thumb = "thumbnail"
         mock(@image).thumbnail(800) { |size, block| block.call(thumb) }
         mock(thumb).save(anything)
-        mock(controller).send_file(anything, :disposition => "inline", :type => "image/jpeg")
+        mock(controller).send_file(anything, :disposition => "inline", :type => "image/jpeg", :stream => true)
 
         get :show, :photo_id => "123", :id => "800", :format => "jpg"
         response.content_type.should == "image/jpeg"
@@ -34,7 +34,7 @@ describe VariantsController do
         thumb = "thumbnail"
         mock(@image).cropped_thumbnail(150) { |size, block| block.call(thumb) }
         mock(thumb).save(anything)
-        mock(controller).send_file(anything, :disposition => "inline", :type => "image/jpeg")
+        mock(controller).send_file(anything, :disposition => "inline", :type => "image/jpeg", :stream => true)
 
         get :show, :photo_id => "123", :id => "150c", :format => "jpg"
         response.content_type.should == "image/jpeg"
