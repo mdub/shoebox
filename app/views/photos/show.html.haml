@@ -1,10 +1,10 @@
 .controls
-  %ul#prev
-    - for p in @prior_photos
-      %li= photo_link(p)
-  %ul#next
-    - for p in @subsequent_photos
-      %li= photo_link(p)
+  %ul#prior
+    - @prior_photos.each_with_index do |p, i|
+      %li= photo_link(p, :id => ("prev" if i.zero?))
+  %ul#subsequent
+    - @subsequent_photos.each_with_index do |p, i|
+      %li= photo_link(p, :id => ("next" if i.zero?))
 
 .centered
   %p
