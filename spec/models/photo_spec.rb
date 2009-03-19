@@ -91,9 +91,9 @@ describe Photo do
     end
     
     before do
-      @yesterday = load_image "safari.png", :timestamp => 1.day.ago
-      @last_month = load_image "finder.png", :timestamp => 1.month.ago
-      @today = load_image "date.png", :timestamp => 3.minutes.ago
+      @photo1 = load_image "safari.png", :timestamp => 1.day.ago
+      @photo2 = load_image "finder.png", :timestamp => 1.month.ago
+      @photo3 = load_image "date.png", :timestamp => 3.minutes.ago
     end
 
     describe "member" do
@@ -101,11 +101,11 @@ describe Photo do
       describe "#previous" do
 
         it "returns the previous photo" do
-          @yesterday.previous.should == @last_month
+          @photo2.previous.should == @photo1
         end
 
         it "returns nil if there's no previous photo" do
-          @last_month.previous.should == nil
+          @photo1.previous.should == nil
         end
         
       end
@@ -113,11 +113,11 @@ describe Photo do
       describe "#next" do
 
         it "returns the next photo" do
-          @yesterday.next.should == @today
+          @photo2.next.should == @photo3
         end
 
         it "returns nil if there's no next photo" do
-          @today.next.should == nil
+          @photo3.next.should == nil
         end
 
       end

@@ -18,22 +18,21 @@ class Photo < ActiveRecord::Base
   
   validates_uniqueness_of :sha1_digest, :message => "is not unique; looks like this is a duplicate"
 
-  named_scope :by_timestamp, {
-    :conditions => ["timestamp IS NOT NULL"], 
-    :order => "timestamp, id"
+  named_scope :by_id, {
+    :order => "id"
   }
  
-  named_scope :before, lambda { |timestamp|
+  named_scope :before, lambda { |id|
     {
-      :order =>"timestamp DESC, id DESC",
-      :conditions => ["timestamp < ?", timestamp]
+      :order => "id DESC",
+      :conditions => ["id < ?", id]
     }
   }
 
-  named_scope :after, lambda { |timestamp|
+  named_scope :after, lambda { |id|
     {
-      :order =>"timestamp, id",
-      :conditions => ["timestamp > ?", timestamp]
+      :order => "id",
+      :conditions => ["id > ?", id]
     }
   }
   
@@ -47,7 +46,7 @@ class Photo < ActiveRecord::Base
   end
   
   def prior
-    self.class.before(timestamp)
+    self.class.before(id)
   end
   
   def previous
@@ -55,7 +54,7 @@ class Photo < ActiveRecord::Base
   end
 
   def subsequent
-    self.class.after(timestamp)
+    self.class.after(id)
   end
   
   def next

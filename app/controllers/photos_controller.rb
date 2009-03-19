@@ -14,7 +14,7 @@ class PhotosController < ApplicationController
   protected
   
   def current_objects
-    Photo.by_timestamp.paginate(:page => params[:page])
+    Photo.by_id.paginate(:page => params[:page])
   end
   
 end
