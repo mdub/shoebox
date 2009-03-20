@@ -27,4 +27,37 @@ describe Importer do
     
   end
   
+  describe "with an archive directory" do
+    
+    before do
+      @original_photo_file = Pathname("#{test_tmp_dir}/photo.jpg")
+      FileUtils.copy(image_fixture_file("jonah-with-tractor.jpg"), @original_photo_file)
+      @original_photo_file.should exist
+      
+      @archive_dir = Pathname("#{test_tmp_dir}/archive")
+      @archive_dir.mkpath
+      @importer.archive_dir = @archive_dir
+      @archived_photo_file = @archive_dir + "photo.jpg"
+    end
+
+    after do
+      FileUtils.rm_f(@original_photo_file)
+      @archive_dir.rmtree
+    end
+    
+    it "moves imported photos into the archive" do
+      @importer.import([@original_photo_file])
+      @original_photo_file.should_not exist
+      @archived_photo_file.should exist
+    end
+
+    it "does not move photos that fail to import" do
+      mock.instance_of(Photo).save { false }
+      @importer.import([@original_photo_file])
+      @original_photo_file.should exist
+      @archived_photo_file.should_not exist
+    end
+    
+  end
+  
 end
