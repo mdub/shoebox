@@ -16,6 +16,8 @@
 ✓ Support bulk upload of an entire directory (from script)
 ✓ Option to archive uploaded photos
 - Support bulk upload of an entire directory (from web-app)
+- Import existing photo library
+- Automate deployment (using Vlad?)
 - Ensure EXIF info is retaining in downscaled images
 - Write comment into EXIF comment field
 - Rotate a photo
