@@ -8,7 +8,7 @@ class Photo < ActiveRecord::Base
     :content_type => :image, 
     :max_size => 4.megabytes,
     :storage => :file_system, 
-    :path_prefix => "public/var/#{Rails.env}/photos"
+    :path_prefix => "public/system/photos"
   }
   )
 
