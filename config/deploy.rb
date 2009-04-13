@@ -1,6 +1,6 @@
 set :application, "snap-cache"
 set :domain,      "lounge.local"
-set :repository,  "git@github.com:mdub/snap-cache.git"
+set :repository,  "git://github.com/mdub/snap-cache.git"
 set :use_sudo,    false
 set :deploy_to,   "/Users/mdub/WebApps/#{application}"
 set :scm,         "git"
