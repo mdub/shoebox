@@ -24,4 +24,11 @@ namespace :deploy do
     run "touch #{current_release}/tmp/restart.txt"
   end
 
+  task :after_finalize_update, :except => { :no_release => true } do
+    run <<-CMD
+      mkdir -p #{shared_path}/db &&
+      ln -s #{shared_path}/db/production.sqlite3 #{latest_release}/db/production.sqlite3
+    CMD
+  end
+
 end
