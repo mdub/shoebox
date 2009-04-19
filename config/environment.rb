@@ -59,7 +59,7 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_snap-cache_session',
+    :session_key => '_shoebox_session',
     :secret      => '64ebbd5738d18b0d3d2bfc238980d2be026f630399af6dbcca0da0e54403078518ade5e0e684ad1f4b5f95fb9d363f017dabee5f9134b4fba4117dea7c3cca23'
   }
 
