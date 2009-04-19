@@ -1,0 +1,4 @@
+--ignore-dir=log
+--ignore-dir=target
+--ignore-dir=tmp
+-type-set=cucumber=.feature
