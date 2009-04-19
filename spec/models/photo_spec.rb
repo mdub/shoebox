@@ -11,8 +11,8 @@ describe Photo do
       @photo = Photo.create!(:uploaded_data => upload)
     end
 
-    it "is stored in /public/var/test/photos" do
-      @photo.public_filename.should =~ %r{^/var/#{Rails.env}/photos/.*/ngara-on-train\.jpg$}
+    it "is stored in /public/system/photos" do
+      @photo.public_filename.should =~ %r{^/system/photos/.*/ngara-on-train\.jpg$}
       image_file_path = "#{RAILS_ROOT}/public#{@photo.public_filename}"
       Pathname(image_file_path).should exist
     end

@@ -2,7 +2,7 @@ db/*.sqlite3
 db/schema.*
 log/*
 tmp
-public/var
 public/photos
+public/system
 coverage
 public/stylesheets/*.css
