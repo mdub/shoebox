@@ -4,6 +4,7 @@ set :repository,  "git://github.com/mdub/shoebox.git"
 set :use_sudo,    false
 set :deploy_to,   "/Users/mdub/WebApps/#{application}"
 set :scm,         "git"
+set :deploy_via, :remote_cache
 
 role :app, domain
 role :web, domain
