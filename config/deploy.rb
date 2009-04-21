@@ -26,10 +26,7 @@ namespace :deploy do
   end
 
   task :after_finalize_update, :except => { :no_release => true } do
-    run <<-CMD
-      mkdir -p #{shared_path}/db &&
-      ln -s #{shared_path}/db/production.sqlite3 #{latest_release}/db/production.sqlite3
-    CMD
+    run "rm -f #{latest_release}/config/database.yml; ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
   end
 
 end
