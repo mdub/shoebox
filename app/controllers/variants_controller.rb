@@ -21,23 +21,15 @@ class VariantsController < ApplicationController
   end
   
   def generate_variant
+    image = MiniMagick::Image.from_file(@photo.full_filename)
+
+    size = params[:id].to_i
+    image.resize "#{size}x#{size}"
+
     @variant_file_name = File.join(Rails.public_path, request.path)
     FileUtils.mkpath(File.dirname(@variant_file_name))
-
-    variant_key = params[:id]
-    op = case variant_key 
-    when /^(\d+)$/
-      [:thumbnail, $1.to_i]
-    when /^(\d+)c$/
-      [:cropped_thumbnail, $1.to_i]
-    end
-    
-    @photo.with_image do |original|
-      original.send(*op) do |variant|
-        variant.save(@variant_file_name)
-      end
-    end
-
+    image.run_command("mogrify", "-auto-orient", image.path)
+    image.write(@variant_file_name)
   end
   
 end
