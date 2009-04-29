@@ -62,6 +62,13 @@ class Photo < ActiveRecord::Base
     subsequent.first
   end
 
+  def write_variant(*convert_args)
+    command = ["convert", full_filename] + convert_args
+    unless system(*command)
+      raise "Command #{command.inspect} failed with exit status #{$?.exitstatus}"
+    end
+  end
+  
   protected
   
   def extract_details_from_original

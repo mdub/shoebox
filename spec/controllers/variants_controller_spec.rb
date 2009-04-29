@@ -5,41 +5,22 @@ describe VariantsController do
   before do 
     @photo = "mock photo"
     stub(Photo).find_by_id("123") { @photo }
-    @image = "image"
-    mock(@photo).with_image { |block| block.call(@image) }
+    stub(@photo).write_variant
+    stub(controller).send_file
   end
 
   describe "#show" do
 
-    describe "'800'" do
+    it "serves a transformed image" do
 
-      it "serves a scaled down image" do
+      stub(VariantsController::VARIANTS).[]("xyz") { ["-futz", "withit"] }  
 
-        thumb = "thumbnail"
-        mock(@image).thumbnail(800) { |size, block| block.call(thumb) }
-        mock(thumb).save(anything)
-        mock(controller).send_file(anything, :disposition => "inline", :type => "image/jpeg", :stream => true)
+      get :show, :photo_id => "123", :id => "xyz", :format => "jpg"
 
-        get :show, :photo_id => "123", :id => "800", :format => "jpg"
-        response.content_type.should == "image/jpeg"
+      @photo.should have_received.write_variant("-futz", "withit", anything)
 
-      end
-
-    end
-
-    describe "'150c'" do
-
-      it "serves a cropped thumbnail" do
-
-        thumb = "thumbnail"
-        mock(@image).cropped_thumbnail(150) { |size, block| block.call(thumb) }
-        mock(thumb).save(anything)
-        mock(controller).send_file(anything, :disposition => "inline", :type => "image/jpeg", :stream => true)
-
-        get :show, :photo_id => "123", :id => "150c", :format => "jpg"
-        response.content_type.should == "image/jpeg"
-
-      end
+      controller.should have_received.send_file(anything, :disposition => "inline", :type => "image/jpeg", :stream => true)
+      response.content_type.should == "image/jpeg"
 
     end
 

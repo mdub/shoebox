@@ -4,6 +4,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'spec'
 require 'spec/rails'
 require 'spec/rr'
+require 'rr'
 
 Spec::Runner.configure do |config|
   
@@ -11,7 +12,7 @@ Spec::Runner.configure do |config|
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
 
-  config.mock_with :rr
+  config.mock_with RR::Adapters::Rspec
 
 end
 

@@ -81,6 +81,31 @@ describe Photo do
     
   end
   
+  describe "#write_variant" do
+  
+    it "invokes (ImageMagick) 'convert' with specified arguments" do
+      @photo = Photo.new
+      stub(@photo).full_filename { "/a/b/c.jpg" }
+      stub(@photo).system { true }
+      
+      @photo.write_variant("-resize", "50x60", "result.jpg")
+      
+      @photo.should have_received.system("convert", "/a/b/c.jpg", "-resize", "50x60", "result.jpg")
+    end
+  
+    it "throws an exception if convert fails" do
+      @photo = Photo.new
+      stub(@photo).full_filename { "/a/b/c.jpg" }
+      stub(@photo).system { false }
+
+      lambda do
+        @photo.write_variant("-resize", "50x60", "result.jpg")
+      end.should raise_error
+      
+    end
+    
+  end
+  
   describe "collection" do
 
     def load_image(name, options = {})

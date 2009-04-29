@@ -1,11 +1,11 @@
 module PhotosHelper
 
   def photo_snap_path(photo)
-    photo_variant_path(photo, "600", :format => "jpg")
+    photo_variant_path(photo, "snap", :format => "jpg")
   end
 
   def photo_thumb_path(photo)
-    photo_variant_path(photo, "100c", :format => "jpg")
+    photo_variant_path(photo, "thumb", :format => "jpg")
   end
 
   def photo_thumb(photo)
