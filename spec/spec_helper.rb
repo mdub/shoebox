@@ -6,6 +6,8 @@ require 'spec/rails'
 require 'spec/rr'
 require 'rr'
 
+require File.expand_path(File.dirname(__FILE__) + "/blueprints")
+
 Spec::Runner.configure do |config|
   
   config.use_transactional_fixtures = true
