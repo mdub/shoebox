@@ -2,19 +2,11 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Import do
 
-  before do
-    @import = Import.make
+  before(:each) do
+    @valid_attributes = {
+    }
   end
 
-  describe "#log" do
-    
-    it "pretends to be a log-file" do
-      @import.log.puts "one"
-      @import.log.puts "two"
-      
-      @import.log.entries.should == ["one", "two"]
-    end
+  it "should create a new instance given valid attributes" 
 
-  end
-  
 end
