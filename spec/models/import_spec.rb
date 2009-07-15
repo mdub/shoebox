@@ -3,10 +3,11 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Import do
 
   before(:each) do
-    @valid_attributes = {
-    }
+    @import = Import.make_unsaved
   end
 
-  it "should create a new instance given valid attributes" 
+  it "has associated files" do
+    @import.files.should == []
+  end 
 
 end

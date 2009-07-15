@@ -4,4 +4,6 @@ class Import < ActiveRecord::Base
     :order => "id DESC"
   }
   
+  has_many :files, :class_name => "ImportFile"
+  
 end
