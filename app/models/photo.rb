@@ -72,7 +72,7 @@ class Photo < ActiveRecord::Base
   protected
   
   def extract_details_from_original
-    return false unless save_attachment?
+    return nil unless save_attachment?
     self.sha1_digest = Digest::SHA1.hexdigest(temp_data)
     if content_type == "image/jpeg"
       self.timestamp = EXIFR::JPEG.new(temp_path).date_time

@@ -1,6 +1,8 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 
+gem "rr", "0.9.0"
+
 require 'spec'
 require 'spec/rails'
 require 'spec/rr'
