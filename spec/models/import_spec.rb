@@ -1,5 +1,16 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
+require "fileutils"
+require "pathname"
+
+class Pathname
+  
+  def touch
+    FileUtils.touch(self.to_s)
+  end
+  
+end
+
 describe Import do
 
   before do
@@ -10,6 +21,19 @@ describe Import do
     Import.make_unsaved.files.should == []
   end 
 
+  describe ".of_dir" do
+    
+    it "attaches a ImportFile for all images in the directory" do
+      @photo_dir = Pathname(test_tmp_dir) + "mypix"
+      @photo_dir.mkpath
+      (@photo_dir + "aaa.jpg").touch
+      (@photo_dir + "bbb.jpg").touch
+      @import = Import.of_dir(@photo_dir.to_s)
+      @import.files.should have(2).entries
+    end
+    
+  end
+  
   describe "when complete" do
     
     before do
