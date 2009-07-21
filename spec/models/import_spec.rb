@@ -10,6 +10,23 @@ describe Import do
     Import.make_unsaved.files.should == []
   end 
 
+  describe "when complete" do
+    
+    before do
+      @original_completion_time = 1.hour.ago.change(:usec => 0)
+      @import = Import.make(:completed_at => @original_completion_time)
+    end
+
+    describe "#execute" do
+      
+      it "does nothing" do
+        @import.completed_at.should == @original_completion_time
+      end
+      
+    end
+    
+  end
+
   describe "when not complete" do
 
     before do

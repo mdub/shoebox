@@ -15,6 +15,7 @@ class Import < ActiveRecord::Base
   }
   
   def execute
+    return self.completed_at if complete?
     files.incomplete.each do |import_file|
       import_file.execute
     end
