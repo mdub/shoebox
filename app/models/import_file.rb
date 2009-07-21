@@ -7,6 +7,14 @@ class ImportFile < ActiveRecord::Base
   
   belongs_to :photo
   
+  named_scope :completed, {
+    :conditions => ["completed_at IS NOT NULL"]
+  }
+
+  named_scope :incomplete, {
+    :conditions => ["completed_at IS NULL"]
+  }
+  
   def execute
     transaction do
       photo = Photo.from_file(path)
