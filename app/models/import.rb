@@ -6,10 +6,23 @@ class Import < ActiveRecord::Base
   
   has_many :files, :class_name => "ImportFile"
   
+  named_scope :complete, {
+    :conditions => ["completed_at IS NOT NULL"]
+  }
+
+  named_scope :incomplete, {
+    :conditions => ["completed_at IS NULL"]
+  }
+  
   def execute
     files.incomplete.each do |import_file|
       import_file.execute
     end
+    self.update_attributes!(:completed_at => Time.now)
+  end
+  
+  def complete?
+    !completed_at.nil?
   end
   
 end

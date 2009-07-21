@@ -2,22 +2,20 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Import do
 
-  before(:each) do
-    @import = Import.make_unsaved
+  before do
+    stub.instance_of(ImportFile).execute
   end
 
   it "has associated files" do
-    @import.files.should == []
+    Import.make_unsaved.files.should == []
   end 
 
-  describe "#execute" do
-    
-    before(:each) do
-      
-      stub.instance_of(ImportFile).execute
-      
+  describe "when not complete" do
+
+    before do
+
       @import = Import.make
-      
+
       @incomplete_file = mock_model(ImportFile)
 
       stub(@import).files.stub!.incomplete {
@@ -25,16 +23,33 @@ describe Import do
           @incomplete_file
         ]
       }
+
+    end
+
+    describe "#complete?" do
       
-      
-      @import.execute
+      it "returns false" do
+        @import.should_not be_complete
+      end
       
     end
     
-    it "executes incomplete ImportFiles" do
-      @incomplete_file.should have_received.execute
+    describe "#execute" do
+
+      before do
+        @import.execute
+      end
+
+      it "executes incomplete ImportFiles" do
+        @incomplete_file.should have_received.execute
+      end
+
+      it "marks the import as complete" do
+        @import.should be_complete
+      end
+
     end
-    
+
   end
-  
+
 end
