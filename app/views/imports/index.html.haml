@@ -1,1 +1,15 @@
-blah
+%table.spiffy
+  %thead
+    %tr
+      %th Started at
+      %th Progress
+      %th Completed at
+  %tbody
+    - @imports.each do |import|
+      %tr
+        %td= format_datetime(import.created_at)
+        %td
+          = import.files.complete.size
+          = "/"
+          = import.files.size
+        %td= format_datetime(import.completed_at)
