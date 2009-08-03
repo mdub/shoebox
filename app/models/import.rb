@@ -15,10 +15,15 @@ class Import < ActiveRecord::Base
   }
 
   def self.of_dir(dir_path)
+    dir_path = File.expand_path(dir_path)
+    file_paths = Dir.glob(File.join(dir_path, "**/*.jpg"))
+    self.of_files(file_paths)
+  end
+
+  def self.of_files(file_paths)
     returning (self.create!) do |import|
-      dir_path = File.expand_path(dir_path)
-      Dir.glob(File.join(dir_path, "**/*.jpg")).each do |jpg|
-        import.files.create!(:path => jpg)
+      file_paths.each do |f|
+        import.files.create!(:path => File.expand_path(f))
       end
     end
   end
