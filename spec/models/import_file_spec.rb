@@ -23,11 +23,11 @@ describe ImportFile do
   describe "#execute" do
 
     before do
-      @photo = mock_model(Photo)
+      @photo = stub_model(Photo, :path => "/path/to/file.jpg")
       stub(Photo).from_file(anything) { @photo }
       stub(@photo).save { true }
     end
-    
+
     it "tries to create a Photo from the named file" do
       @import_file.execute
       Photo.should have_received.from_file(@import_file.path)
@@ -47,7 +47,7 @@ describe ImportFile do
       it "populates photo_id" do
         @import_file.photo.should == @photo
       end
-
+      
     end
 
     describe "- if Photo cannot be saved" do
@@ -68,22 +68,22 @@ describe ImportFile do
 
     end
     
-    describe "- if Photo#save raises an exception" do
-      
-      before do
-        stub(@photo).save { raise "foo" }
-        @import_file.execute
-      end
-      
-      it "populates completed_at" do
-        @import_file.completed_at.should_not be_nil
-      end
-      
-      it "records exception" do
-        @import_file.message.should =~ /^RuntimeError: foo\n  at/
-      end
-
-    end
+    # describe "- if Photo#save raises an exception" do
+    #   
+    #   before do
+    #     stub(@photo).save { raise "foo" }
+    #     @import_file.execute
+    #   end
+    #   
+    #   it "populates completed_at" do
+    #     @import_file.completed_at.should_not be_nil
+    #   end
+    #   
+    #   it "records exception" do
+    #     @import_file.message.should =~ /^RuntimeError: foo\n  at/
+    #   end
+    # 
+    # end
     
   end
   

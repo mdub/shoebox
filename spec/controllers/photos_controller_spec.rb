@@ -25,13 +25,13 @@ describe PhotosController do
     describe "with a valid photo id" do
 
       before do
-        @photo = mock_model(Photo)
+        @photo = stub_model(Photo)
         mock(Photo).find(@photo.id.to_s) { @photo }
 
-        @prior_photos = [mock_model(Photo)]
+        @prior_photos = [stub_model(Photo)]
         stub(@photo).prior.stub!.all { @prior_photos }
 
-        @subsequent_photos = [mock_model(Photo)]
+        @subsequent_photos = [stub_model(Photo)]
         stub(@photo).subsequent.stub!.all { @subsequent_photos }
         
         get :show, :id => @photo.id

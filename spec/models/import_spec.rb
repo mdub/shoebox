@@ -57,7 +57,7 @@ describe Import do
 
       @import = Import.make
 
-      @incomplete_file = mock_model(ImportFile)
+      @incomplete_file = stub_model(ImportFile)
 
       stub(@import).files.stub!.incomplete {
         [

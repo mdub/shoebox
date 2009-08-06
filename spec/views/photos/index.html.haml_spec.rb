@@ -6,7 +6,7 @@ describe "photos/index" do
 
     before do
       @photos = (1..3).map do
-        mock_model(Photo)
+        stub_model(Photo)
       end.paginate(:page => 1)
       assigns[:photos] = @photos
       render :action => "photos/index"
