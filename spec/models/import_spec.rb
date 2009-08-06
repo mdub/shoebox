@@ -78,7 +78,10 @@ describe Import do
     describe "#execute" do
 
       before do
-        @import.execute
+        @completed = []
+        @import.execute do |x|
+          @completed << x
+        end
       end
 
       it "executes incomplete ImportFiles" do
@@ -89,6 +92,10 @@ describe Import do
         @import.should be_complete
       end
 
+      it "calls the associated block for each completed file" do
+        @completed.should == [@incomplete_file]
+      end
+      
     end
 
   end

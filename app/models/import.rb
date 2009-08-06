@@ -32,6 +32,7 @@ class Import < ActiveRecord::Base
     return self.completed_at if complete?
     files.incomplete.each do |import_file|
       import_file.execute
+      yield(import_file) if block_given?
     end
     self.update_attributes!(:completed_at => Time.now)
   end
