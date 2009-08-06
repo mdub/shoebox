@@ -11,16 +11,16 @@ describe Importer do
   describe "#import" do
     
     it "imports named files" do
-      stub(Photo).from_file("a.jpg") { stub_model(Photo, :save => true) }
-      stub(Photo).from_file("b.jpg") { stub_model(Photo, :save => true) }
+      stub(Photo).from_file { stub_model(Photo, :save => true) }
       @importer.import(%w(a.jpg b.jpg))
       @output.should =~ /imported.* a\.jpg/
       @output.should =~ /imported.* b\.jpg/
     end
     
     it "reports errors on import failure" do
-      @photo = stub_model(Photo, :save => false, :errors => ["shit happened"])
-      stub(Photo).from_file("a.jpg") { @photo }
+      @photo = stub_model(Photo, :save => false)
+      stub(@photo).errors.stub!.full_messages { ["shit happened"] }
+      stub(Photo).from_file { @photo }
       @importer.import(%w(a.jpg))
       @output.should =~ /  - shit happened/
     end

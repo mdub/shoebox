@@ -1,3 +1,5 @@
+require "pathname"
+
 class Importer
 
   attr_writer :out
@@ -12,22 +14,16 @@ class Importer
   end
   
   def import(filenames)
-    filenames.each do |f|
-      import_photo(f)
-    end
-  end
-  
-  private
-  
-  def import_photo(f)
-    photo = Photo.from_file(f)
-    if photo.save
-      say "imported photo##{photo.id} from #{f}"
-      FileUtils.move(f, archive_dir) if archive_dir
-    else
-      say "import of #{f} failed:"
-      photo.errors.to_a.each do |msg|
-        say "  - #{msg}"
+    Import.of_files(filenames).execute do |f|
+      relative_path = Pathname(f.path).expand_path.relative_path_from(Pathname.pwd)
+      if f.successful?
+        say "imported photo##{f.photo.id} from #{relative_path}"
+        FileUtils.move(f.path, archive_dir) if archive_dir
+      else
+        say "import of #{relative_path} failed:"
+        f.messages.each do |msg|
+          say "  - #{msg}"
+        end
       end
     end
   end

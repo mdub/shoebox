@@ -28,4 +28,12 @@ class ImportFile < ActiveRecord::Base
     end
   end
 
+  def messages
+    YAML.load(message) if message
+  end
+  
+  def successful?
+    message.blank?
+  end
+  
 end
