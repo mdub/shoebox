@@ -1,3 +1,65 @@
+body
+
+  :margin 0
+  :padding 0
+
+  &.development
+    :border-top 10px solid green
+
+  &.test
+    :border-top 10px solid orange
+
+ul.menubar
+  :margin 0 0 10px 0
+  :background #222
+  :padding 0
+  :list-style none
+
+  li
+    :display inline-block
+    :margin 0 5px
+
+  a
+    :display inline-block
+    :margin 0.3em
+    :-moz-border-radius 5px
+    :-webkit-border-radius 5px
+    :padding 0.2em 0.5em
+    :color #fff
+    :text-decoration none
+    :font-variant small-caps
+
+    &:hover
+      :background #933
+      
+/   
+/ #banner nav a:link, #banner nav a:visited {  
+/     color: #fff;  
+/     display: inline-block;  
+/     height: 30px;  
+/     padding: 5px 1.5em;  
+/     text-decoration: none;  
+/ }  
+/ #banner nav a:hover, #banner nav a:active,  
+/ #banner nav .active a:link, #banner nav .active a:visited {  
+/     background: #C74451;  
+/     color: #fff;  
+/     text-shadow: none !important;  
+/ }  
+/   
+/ #banner nav li:first-child a {  
+/     border-top-left-radius: 5px;  
+/     -moz-border-radius-topleft: 5px;  
+/     -webkit-border-top-left-radius: 5px;  
+/   
+/     border-bottom-left-radius: 5px;  
+/     -moz-border-radius-bottomleft: 5px;  
+/     -webkit-border-bottom-left-radius: 5px;  
+/ }  
+
+#content
+  :padding 5px
+  
 #main
   :background-color #f00
   :width 98%

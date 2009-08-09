@@ -18,7 +18,7 @@
 ✓ Ensure EXIF info (esp. Orientation) is retaining in downscaled images
 ✓ Associate imported Photos with an Import
 ✓ Maintain ImportLogEntries
-- Importer should create an Import
+✓ Importer should create an Import
 - Support bulk upload of an entire directory (from web-app)
 - Import existing photo library
 ✓ Automate deployment (using Vlad?)

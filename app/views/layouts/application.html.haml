@@ -9,6 +9,11 @@
     = yield :head
 
   %body{ :class => RAILS_ENV }
+
+    %ul.menubar
+      %li= link_to "Photos", photos_path
+      %li= link_to "Imports", imports_path
+      
     #content
 
       = yield
