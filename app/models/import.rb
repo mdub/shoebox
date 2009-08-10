@@ -4,7 +4,7 @@ class Import < ActiveRecord::Base
     :order => "id DESC"
   }
 
-  has_many :files, :class_name => "ImportFile"
+  has_many :files, :class_name => "ImportFile", :dependent => :delete_all
 
   named_scope :complete, {
     :conditions => ["completed_at IS NOT NULL"]

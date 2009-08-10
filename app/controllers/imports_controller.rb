@@ -2,7 +2,7 @@ class ImportsController < ApplicationController
 
   make_resourceful do
     
-    actions :index, :new, :create, :show
+    actions :index, :new, :create, :show, :destroy
   
   end
   
