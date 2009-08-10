@@ -4,5 +4,5 @@ module ApplicationHelper
   def format_datetime(datetime)
     datetime.to_s(:short) if datetime
   end
-  
+
 end
