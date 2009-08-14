@@ -1,17 +1,23 @@
-%table.spiffy
-  %thead
-    %tr
-      %th Started at
-      %th Progress
-      %th Completed at
-      %th
-  %tbody
-    - @imports.each do |import|
+
+
+- unless @imports.empty?
+
+  %h2 Previous imports
+
+  %table.spiffy
+    %thead
       %tr
-        %td= format_datetime(import.created_at)
-        %td
-          = import.files.complete.size
-          = "/"
-          = import.files.size
-        %td= format_datetime(import.completed_at)
-        %td= button_to("Delete", import_path(import), :method => :delete) if import.complete?
+        %th Started at
+        %th Progress
+        %th Completed at
+        %th
+    %tbody
+      - @imports.each do |import|
+        %tr
+          %td= format_datetime(import.created_at)
+          %td
+            = import.files.complete.size
+            = "/"
+            = import.files.size
+          %td= format_datetime(import.completed_at)
+          %td= button_to("Delete", import_path(import), :method => :delete) if import.complete?
