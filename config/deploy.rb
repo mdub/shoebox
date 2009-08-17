@@ -31,7 +31,7 @@ namespace :deploy do
       rm -f #{latest_release}/public/photos &&
       ln -s #{shared_path}/cache/photos #{latest_release}/public/photos &&
       rm -f #{latest_release}/config/database.yml &&
-      ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
+      ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml
     CMD
   end
 
