@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
     photo.resources :variants
   end
 
-  map.resources :imports, :member => { :start => :post }
+  map.resources :imports
   
   map.root :controller => "welcome"
 

@@ -36,6 +36,10 @@ class Import < ActiveRecord::Base
     end
     self.update_attributes!(:completed_at => Time.now)
   end
+  
+  def execute_in_background
+    Bj.submit "./jobs/execute_import #{self.id}"
+  end
 
   def complete?
     !completed_at.nil?

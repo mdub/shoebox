@@ -19,14 +19,20 @@ describe ImportsController do
 
     before do
       Import.destroy_all
+      @import = "an Import"
+      stub(Import).of_dir(anything) { @import }
+      stub(@import).execute_in_background
+      post :create, :import => { :directory => "/a/b/c" }
     end
     
     it "creates a new Import" do
-      @import = "an Import"
-      mock(Import).of_dir("/a/b/c") { @import }
-      post :create, :import => { :directory => "/a/b/c" }
+      Import.should have_received.of_dir("/a/b/c")
     end
 
+    it "starts the import, as a background job" do
+      @import.should have_received.execute_in_background
+    end
+    
     it "redirects back to index" do
       response.should redirect_to(:action => :index)
     end

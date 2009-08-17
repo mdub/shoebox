@@ -8,15 +8,10 @@ class ImportsController < ApplicationController
 
   def create
     directory = params[:import][:directory] rescue nil
-    Import.of_dir(directory) if directory
-    redirect_to(:action => :index)
-  end
-
-  def start
-    import = Import.find(params[:id])
-    Bj.submit "./jobs/execute_import #{import.id}"
-    flash[:info] = "Job started"
-    redirect_to(:action => :index)
+    if directory
+      Import.of_dir(directory).execute_in_background
+    end
+    redirect_to imports_path
   end
   
   protected
