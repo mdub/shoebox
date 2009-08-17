@@ -30,4 +30,6 @@
             = "/"
             = import.files.size
           %td= format_datetime(import.completed_at)
-          %td= button_to("Delete", import_path(import), :method => :delete) if import.complete?
+          %td
+            = button_to("Delete", import_path(import), :method => :delete) if import.complete?
+            = button_to("Start", start_import_path(import), :method => :post) unless import.complete?

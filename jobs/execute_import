@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require File.dirname(__FILE__) + '/../config/environment'
+
+import_id = *ARGV
+
+Import.find(import_id).execute do |f|
+  relative_path = Pathname(f.path).expand_path.relative_path_from(Pathname.pwd)
+  if f.successful?
+    puts "imported photo##{f.photo.id} from #{f.path}"
+  else
+    puts "import of #{relative_path} failed:"
+    f.messages.each do |msg|
+      puts "  - #{msg}"
+    end
+  end
+end

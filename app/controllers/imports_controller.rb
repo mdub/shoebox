@@ -11,6 +11,13 @@ class ImportsController < ApplicationController
     Import.of_dir(directory) if directory
     redirect_to(:action => :index)
   end
+
+  def start
+    import = Import.find(params[:id])
+    Bj.submit "./jobs/execute_import #{import.id}"
+    flash[:info] = "Job started"
+    redirect_to(:action => :index)
+  end
   
   protected
   
