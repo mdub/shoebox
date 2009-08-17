@@ -26,7 +26,13 @@ namespace :deploy do
   end
 
   task :after_finalize_update, :except => { :no_release => true } do
-    run "rm -f #{latest_release}/config/database.yml; ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
+    run <<-CMD
+      mkdir -p #{shared_path}/cache/photos &&
+      rm -f #{latest_release}/public/photos &&
+      ln -s #{shared_path}/cache/photos #{latest_release}/public/photos &&
+      rm -f #{latest_release}/config/database.yml &&
+      ln -s #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
+    CMD
   end
 
 end
