@@ -1,4 +1,14 @@
+- form_for :import do |f|
 
+  %fieldset
+    %legend Import a directory
+  
+    %p
+      = f.label "directory"
+      = f.text_field "directory"
+    %p
+      = f.submit "Go"
+  
 
 - unless @imports.empty?
 

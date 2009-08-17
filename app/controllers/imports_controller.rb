@@ -2,8 +2,14 @@ class ImportsController < ApplicationController
 
   make_resourceful do
     
-    actions :index, :new, :create, :show, :destroy
+    actions :index, :show, :destroy
   
+  end
+
+  def create
+    directory = params[:import][:directory] rescue nil
+    Import.of_dir(directory) if directory
+    redirect_to(:action => :index)
   end
   
   protected
