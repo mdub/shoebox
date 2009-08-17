@@ -98,6 +98,22 @@ describe Import do
       
     end
 
+    describe "#execute_in_background" do
+      
+      it "queues a BJ job" do
+
+        @import = Import.make
+        expected_background_command = "./jobs/execute_import #{@import.id}"
+        stub(Bj).submit(anything)
+        
+        @import.execute_in_background
+        
+        Bj.should have_received.submit(expected_background_command)
+        
+      end
+      
+    end
+    
   end
 
 end
