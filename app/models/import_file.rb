@@ -15,6 +15,14 @@ class ImportFile < ActiveRecord::Base
     :conditions => ["completed_at IS NULL"]
   }
 
+  named_scope :failed, {
+    :conditions => ["message IS NOT NULL"]
+  }
+
+  named_scope :successful, {
+    :conditions => ["message IS NULL"]
+  }
+
   def execute
     transaction do
       photo = Photo.from_file(path)
