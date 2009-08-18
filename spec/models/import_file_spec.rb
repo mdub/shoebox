@@ -18,6 +18,7 @@ describe ImportFile do
 
   it "starts incomplete" do
     @import_file.completed_at.should be_nil
+    @import_file.complete?.should == false
   end
   
   describe "#execute" do
@@ -65,25 +66,12 @@ describe ImportFile do
       it "records errors" do
         @import_file.message.should == ["error1", "error2"].to_yaml
       end
+      
+      it "is considered failed" do
+        @import_file.should be_failed
+      end
 
     end
-    
-    # describe "- if Photo#save raises an exception" do
-    #   
-    #   before do
-    #     stub(@photo).save { raise "foo" }
-    #     @import_file.execute
-    #   end
-    #   
-    #   it "populates completed_at" do
-    #     @import_file.completed_at.should_not be_nil
-    #   end
-    #   
-    #   it "records exception" do
-    #     @import_file.message.should =~ /^RuntimeError: foo\n  at/
-    #   end
-    # 
-    # end
     
   end
   

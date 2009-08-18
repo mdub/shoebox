@@ -40,8 +40,16 @@ class ImportFile < ActiveRecord::Base
     YAML.load(message) if message
   end
   
-  def successful?
+  def complete?
+    !completed_at.nil?
+  end
+
+  def succeeded?
     message.blank?
+  end
+
+  def failed?
+    !succeeded?
   end
   
 end

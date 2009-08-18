@@ -16,7 +16,7 @@ class Importer
   def import(filenames)
     Import.of_files(filenames).execute do |f|
       relative_path = Pathname(f.path).expand_path.relative_path_from(Pathname.pwd)
-      if f.successful?
+      if f.succeeded?
         say "imported photo##{f.photo.id} from #{relative_path}"
         FileUtils.move(f.path, archive_dir) if archive_dir
       else
