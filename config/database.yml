@@ -1,11 +1,15 @@
+<% 
+adapter = RUBY_PLATFORM == "java" ? "jdbcsqlite3" : "sqlite3"
+%>
+
 development:
-  adapter: sqlite3
+  adapter: <%=adapter%>
   database: db/development.sqlite3
   pool: 5
   timeout: 5000
 
 test:
-  adapter: sqlite3
+  adapter: <%=adapter%>
   database: db/test.sqlite3
   pool: 5
   timeout: 5000
