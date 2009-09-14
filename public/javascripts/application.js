@@ -13,12 +13,12 @@ jQuery(function($) {
 
       case 37:
       console.info("previous");
-      $("a#prev").followLink();
+      $("a[rel=prev]").followLink();
       break;
 
       case 39:
       console.info("next");
-      $("a#next").followLink();
+      $("a[rel=next]").followLink();
       break;
 
     }
