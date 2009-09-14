@@ -12,12 +12,10 @@ jQuery(function($) {
     switch(event.keyCode) {
 
       case 37:
-      console.info("previous");
       $("a[rel=prev]").followLink();
       break;
 
       case 39:
-      console.info("next");
       $("a[rel=next]").followLink();
       break;
 
