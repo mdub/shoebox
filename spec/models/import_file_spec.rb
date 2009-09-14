@@ -4,6 +4,7 @@ describe ImportFile do
 
   before do
     @import_file = ImportFile.make_unsaved
+    stub(File).exists?(anything) { true }
   end
 
   it "must be associated with an Import" do
@@ -29,9 +30,30 @@ describe ImportFile do
       stub(@photo).save { true }
     end
 
-    it "tries to create a Photo from the named file" do
-      @import_file.execute
-      Photo.should have_received.from_file(@import_file.path)
+    describe "- if path exists" do
+
+      it "tries to create a Photo from the named file" do
+        @import_file.execute
+        Photo.should have_received.from_file(@import_file.path)
+      end
+
+    end
+
+    describe "- if path does not exist" do
+
+      before do
+        mock(File).exists?(@import_file.path) { false }
+        @import_file.execute
+      end
+
+      it "records an error" do
+        @import_file.messages.should == [%{No such file: "#{@import_file.path}"}]
+      end
+
+      it "populates completed_at" do
+        @import_file.completed_at.should_not be_nil
+      end
+      
     end
 
     describe "- if Photo is valid" do

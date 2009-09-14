@@ -10,6 +10,10 @@ describe Importer do
   
   describe "#import" do
     
+    before do
+      stub(File).exists?(anything) { true }
+    end
+    
     it "imports named files" do
       stub(Photo).from_file { stub_model(Photo, :save => true) }
       @importer.import(%w(a.jpg b.jpg))

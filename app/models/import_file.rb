@@ -25,17 +25,20 @@ class ImportFile < ActiveRecord::Base
 
   def execute
     transaction do
-      photo = Photo.from_file(path)
-      if photo.save
-        self.photo = photo
+      if File.exists?(path)
+        import_the_photo
       else
-        self.message = photo.errors.full_messages.to_yaml
+        self.messages = [%{No such file: #{path.inspect}}]
       end
       self.completed_at = Time.new
       self.save!
     end
   end
 
+  def messages=(messages)
+    self.message = messages.to_yaml
+  end
+  
   def messages
     YAML.load(message) if message
   end
@@ -50,6 +53,17 @@ class ImportFile < ActiveRecord::Base
 
   def failed?
     !succeeded?
+  end
+  
+  private
+
+  def import_the_photo
+    photo = Photo.from_file(path)
+    if photo.save
+      self.photo = photo
+    else
+      self.messages = photo.errors.full_messages
+    end
   end
   
 end
