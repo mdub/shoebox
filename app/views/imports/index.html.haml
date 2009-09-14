@@ -17,6 +17,7 @@
   %table.spiffy
     %thead
       %tr
+        %th ID
         %th Progress
         %th Started at
         %th Completed at
@@ -24,6 +25,7 @@
     %tbody
       - @imports.each do |import|
         %tr
+          %td= link_to(import.id, import_path(import))
           %td.progress
             - import.files.each do |import_file|
               = import_file_status(import_file)

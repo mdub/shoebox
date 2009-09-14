@@ -1,0 +1,13 @@
+%h2
+  Import
+  = @import.id
+
+%table
+  - @import.files.each do |file|
+    %tr
+      %td&= file.path
+      %td
+        - if file.failed?
+          %ul.bulleted.problematic
+            - file.messages.each do |message|
+              %li&= message
