@@ -17,11 +17,13 @@ module PhotosHelper
   end
   
   def photo_image(photo, type)
-    image_tag(send("photo_#{type}_path", photo), :class => type.to_s, :title => photo.description)
+    title = photo.timestamp.to_s(:custom) if photo.timestamp
+    image_tag(send("photo_#{type}_path", photo), :class => type.to_s, :title => title)
   end
 
   def photo_link(photo, html_options = {})
-    link_to(photo_thumb(photo), photo_path(photo), html_options) if photo
+    return nil unless photo
+    link_to(photo_thumb(photo), photo_path(photo), html_options) 
   end
 
 end
