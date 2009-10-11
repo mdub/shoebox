@@ -3,7 +3,7 @@
   = @import.id
 
 %table
-  - @import.files.each do |file|
+  - @import.files.by_id.each do |file|
     %tr
       %td&= file.path
       %td

@@ -7,6 +7,10 @@ class ImportFile < ActiveRecord::Base
 
   belongs_to :photo
 
+  named_scope :by_id, {
+    :order => "id ASC"
+  }
+
   named_scope :complete, {
     :conditions => ["completed_at IS NOT NULL"]
   }

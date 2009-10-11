@@ -27,7 +27,7 @@
         %tr
           %td= link_to(import.id, import_path(import))
           %td.progress
-            - import.files.each do |import_file|
+            - import.files.by_id.each do |import_file|
               = import_file_status(import_file)
           %td= format_datetime(import.created_at)
           %td= format_datetime(import.completed_at)
