@@ -2,3 +2,4 @@
 --ignore-dir=target
 --ignore-dir=tmp
 -type-set=cucumber=.feature
+-type-set=haml=.haml
