@@ -8,6 +8,6 @@
 
 .centered
   %p
-    = photo_snap(@photo)
+    = photo_image(@photo, :snap)
   - form_for(@photo) do |f| 
     = f.text_field :description, :cols => 40, :rows => 2

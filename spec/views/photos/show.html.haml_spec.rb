@@ -7,11 +7,8 @@ describe "photos/show" do
     assigns[:photo] = @photo
     assigns[:prior_photos] = [stub_model(Photo, :id => 23)]
     assigns[:subsequent_photos] = [stub_model(Photo, :id => 32) ]
-    stub(template).photo_snap_path do |photo|
-      "/photos/#{photo.id}/snap.jpg"
-    end
-    stub(template).photo_thumb_path do |photo|
-      "/photos/#{photo.id}/thumb.jpg"
+    stub(template).photo_image_path do |photo, variant|
+      "/photos/#{photo.id}/#{variant}.jpg"
     end
     render :action => "photos/show"
   end

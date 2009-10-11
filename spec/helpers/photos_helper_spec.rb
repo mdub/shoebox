@@ -6,20 +6,11 @@ describe PhotosHelper do
     @photo = "some photo"
   end
   
-  describe "#photo_snap_path" do
+  describe "#photo_image_path" do
     
     it "points to a snap" do
-      mock(helper).photo_variant_path(@photo, "snap", :format => "jpg")
-      helper.photo_snap_path(@photo)
-    end
-    
-  end
-  
-  describe "#photo_thumb_path" do
-    
-    it "points to a thumbnail" do
-      mock(helper).photo_variant_path(@photo, "thumb", :format => "jpg")
-      helper.photo_thumb_path(@photo)
+      mock(helper).photo_variant_path(@photo, :snap, :format => "jpg")
+      helper.photo_image_path(@photo)
     end
     
   end
