@@ -17,7 +17,7 @@ module PhotosHelper
   end
   
   def photo_image(photo, type)
-    title = photo.timestamp.to_s(:custom) if photo.timestamp
+    title = photo.timestamp.localtime.to_s(:custom) if photo.timestamp
     image_tag(send("photo_#{type}_path", photo), :class => type.to_s, :title => title)
   end
 
