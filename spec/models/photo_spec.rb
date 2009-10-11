@@ -22,7 +22,7 @@ describe Photo do
   describe ".from_file" do
     
     before(:all) do
-      @photo = Photo.from_file(image_fixture_file("jonah-with-tractor.jpg"))
+      @photo = Photo.from_file(image_fixture_file("jonah-with-tractor.JPG"))
     end
 
     it "derives the content_type" do

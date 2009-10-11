@@ -37,7 +37,7 @@ class Photo < ActiveRecord::Base
   }
   
   def self.from_file(filename)
-    filename = filename.to_str
+    filename = filename.to_str.downcase
     photo = self.new
     content_type = if filename =~ /\.(\w+)$/
       Mime::Type.lookup_by_extension($1).to_s
