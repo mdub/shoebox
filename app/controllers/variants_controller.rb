@@ -26,9 +26,12 @@ class VariantsController < ApplicationController
   end
 
   private
+
+  def variant
+    params[:id].split("-").last
+  end
   
   def resolve_variant
-    variant = params[:id]
     @variant_args = VARIANTS[variant] || raise(ActiveRecord::RecordNotFound, "unknown variant, #{variant}")
   end
   

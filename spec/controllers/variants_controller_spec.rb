@@ -15,7 +15,7 @@ describe VariantsController do
 
       stub(VariantsController::VARIANTS).[]("xyz") { ["-futz", "withit"] }  
 
-      get :show, :photo_id => "123", :id => "xyz", :format => "jpg"
+      get :show, :photo_id => "123", :id => "123-xyz", :format => "jpg"
 
       @photo.should have_received.write_variant("-futz", "withit", anything)
 

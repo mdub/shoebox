@@ -1,7 +1,7 @@
 module PhotosHelper
 
   def photo_image_path(photo, variant = :snap)
-    photo_variant_path(photo, variant, :format => "jpg")
+    photo_variant_path(photo, "#{photo.id}-#{variant}", :format => "jpg")
   end
 
   def photo_image(photo, variant, image_options = {})
