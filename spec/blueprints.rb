@@ -1,4 +1,4 @@
-require "machinist"
+require "machinist/active_record"
 require "faker"
 
 Import.blueprint do

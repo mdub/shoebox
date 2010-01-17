@@ -9,5 +9,7 @@
 .centered
   %p
     = photo_image(@photo, :snap)
+    = link_to("full-size", photo_image_path(@photo, :max))
   - form_for(@photo) do |f| 
     = f.text_field :description, :cols => 40, :rows => 2
+    

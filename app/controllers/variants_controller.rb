@@ -3,8 +3,9 @@ require 'fileutils'
 class VariantsController < ApplicationController
 
   VARIANTS = {
-    "snap" => %w(-resize 600x600 -auto-orient -bordercolor snow -border 10).freeze,
-    "thumb" => %w(-resize 100x100^ -auto-orient -strip -gravity center -extent 100x100).freeze
+    "snap" => %w(-resize 600x600 -auto-orient -bordercolor snow -border 10),
+    "thumb" => %w(-resize 100x100^ -auto-orient -strip -gravity center -extent 100x100),
+    "max" => %w(-auto-orient)
   }
 
   before_filter :resolve_variant
