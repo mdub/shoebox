@@ -4,7 +4,7 @@ describe VariantsController do
 
   before do 
     @photo = "mock photo"
-    stub(Photo).find_by_id("123") { @photo }
+    stub(Photo).find(:first, :conditions => {:id => "123"}) { @photo }
     stub(@photo).write_variant
     stub(controller).send_file
   end
@@ -17,10 +17,11 @@ describe VariantsController do
 
       get :show, :photo_id => "123", :id => "123-xyz", :format => "jpg"
 
+      response.code.should == "200"
+      
       @photo.should have_received.write_variant("-futz", "withit", anything)
 
       controller.should have_received.send_file(anything, :disposition => "inline", :type => "image/jpeg", :stream => true)
-      response.content_type.should == "image/jpeg"
 
     end
 
