@@ -1,0 +1,21 @@
+--- 
+dependencies: 
+- rspec: = 1.2.8
+- rspec-rails: = 1.2.7.1
+- rr: = 0.10.4
+- machinist: = 1.0.6
+specs: 
+- rack: 
+    version: 1.1.0
+- rspec: 
+    version: 1.2.8
+- rspec-rails: 
+    version: 1.2.7.1
+- machinist: 
+    version: 1.0.6
+- rr: 
+    version: 0.10.4
+hash: 764aadd6f6a81c1f4eaae7bc312ec8c9b4391efe
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org
