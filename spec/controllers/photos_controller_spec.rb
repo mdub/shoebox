@@ -5,17 +5,16 @@ describe PhotosController do
   describe "#index" do
 
     it "exposes a paginated list of photos" do
+      
       @paginated_photos = ["paginated list of photos"].paginate
-      stub(controller).params do 
-        { :page => 3 }
-      end
-      mock(Photo).paginate(:page => 3) do
+      mock(Photo).paginate(:page => "3") do
         @paginated_photos
       end
 
-      get :index
+      get :index, :page => 3
 
       assigns[:photos].should == @paginated_photos
+      
     end
 
   end
