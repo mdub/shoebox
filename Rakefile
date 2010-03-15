@@ -1,4 +1,4 @@
-require File.expand_path("../.bundle/environment", __FILE__)
+require File.expand_path(File.dirname(__FILE__) + "/support/required-gems")
 
 require 'rake'
 require 'rake/testtask'
