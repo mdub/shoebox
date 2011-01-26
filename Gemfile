@@ -7,11 +7,14 @@ gem "will_paginate", "~> 2.3.6"
 gem "exifr"
 gem "bj", "1.0.1"
 
-gem "sqlite3"
 gem "capistrano", "~> 2.5"
 
 group :production do
   gem "pg"
+end
+
+group :development do
+  gem "sqlite3"
 end
 
 group :test do
