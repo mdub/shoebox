@@ -1,5 +1,3 @@
-require File.expand_path(File.dirname(__FILE__) + "/../support/required-gems")
-
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 
