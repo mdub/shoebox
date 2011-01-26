@@ -10,6 +10,8 @@ role :app, domain
 role :web, domain
 role :db,  domain, :primary => true
 
+require 'bundler/capistrano'
+
 namespace :deploy do
 
   task :start, :roles => :app do

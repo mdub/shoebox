@@ -8,6 +8,7 @@ gem "exifr"
 gem "bj", "1.0.1"
 
 gem "sqlite3"
+gem "capistrano", "~> 2.5"
 
 group :production do
   gem "pg"
