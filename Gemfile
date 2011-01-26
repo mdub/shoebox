@@ -7,6 +7,12 @@ gem "will_paginate", "~> 2.3.6"
 gem "exifr"
 gem "bj", "1.0.1"
 
+gem "sqlite3"
+
+group :production do
+  gem "pg"
+end
+
 group :test do
   gem "rspec", "~> 1.2.9"
   gem "rspec-rails", "~> 1.2.9"
@@ -14,5 +20,4 @@ group :test do
   gem "machinist", "~> 1.0.6"
   gem "rcov"
   gem "faker"
-  gem "sqlite3"
 end
