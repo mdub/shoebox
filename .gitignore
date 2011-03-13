@@ -6,3 +6,4 @@ public/photos
 public/system
 coverage
 public/stylesheets/*.css
+.rvmrc
