@@ -27,7 +27,7 @@ Spec::Rails::Mocks.module_eval do
 
   def stub_model(model_class, stubs={})
     stubs = {:id => next_id}.merge(stubs)
-    returning model_class.new do |model|
+    model_class.new.tap do |model|
       model.id = stubs.delete(:id)
       model.extend Spec::Rails::Mocks::ModelStubber
       stubs.each do |k,v|
