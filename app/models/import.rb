@@ -21,7 +21,7 @@ class Import < ActiveRecord::Base
   end
 
   def self.of_files(file_paths)
-    returning (self.create!) do |import|
+    self.create!.tap do |import|
       file_paths.each do |f|
         import.files.create!(:path => File.expand_path(f))
       end
