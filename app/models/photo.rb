@@ -1,5 +1,6 @@
 require 'action_controller/test_process'
 require 'digest/sha1'
+require 'shellwords'
 
 class Photo < ActiveRecord::Base
 
@@ -65,7 +66,7 @@ class Photo < ActiveRecord::Base
   def write_variant(*convert_args)
     command = ["convert", full_filename] + convert_args
     unless system(*command)
-      raise "Command #{command.inspect} failed with exit status #{$?.exitstatus}"
+      raise "Command '#{Shellwords.join(command)}' failed with exit status #{$?.exitstatus}"
     end
   end
   
