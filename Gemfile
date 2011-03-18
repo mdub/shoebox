@@ -25,6 +25,6 @@ group :test do
   gem "rspec-rails", "~> 1.2.9"
   gem "rr", "~> 0.10.4"
   gem "machinist", "~> 1.0.6"
-  gem "rcov"
+  # gem "rcov"
   gem "faker"
 end
