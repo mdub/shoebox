@@ -2,6 +2,9 @@ source :rubygems
 
 gem "rails", "2.3.11"
 
+gem "rails_xss"
+gem "erubis"
+
 gem "haml", "2.0.9"
 gem "will_paginate", "~> 2.3.6"
 gem "exifr"
