@@ -5,7 +5,7 @@ module PhotosHelper
   end
 
   def photo_image(photo, variant, image_options = {})
-    title = photo.timestamp.localtime.to_s(:custom) if photo.timestamp
+    title = photo.taken_at.localtime.to_s(:custom) if photo.taken_at
     image_tag(photo_image_path(photo, variant), image_options.reverse_merge(:class => variant.to_s, :title => title))
   end
 

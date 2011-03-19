@@ -1,49 +1,67 @@
-module RRModelMocks
+require 'rr/adapters/rspec'
 
-  # Creates a mock object instance for a +model_class+ with common
-  # methods stubbed out. Additional methods may be easily stubbed (via
-  # add_stubs) if +stubs+ is passed.
-  def mock_model(model_class, options_and_stubs = {})
-    m = model_class.new
-    id = next_id
+module RspecRailsRR
+  
+  def have_received(method = nil)
+    RR::Adapters::Rspec::InvocationMatcher.new(method)
+  end
 
-    # our equivalent to Rspecs :errors => ''# stub("errors", :count => 0)
-    stub(errors_stub = Object.new).count{0}
+  module ActiveModelExtensions
 
-    options_and_stubs.reverse_merge!(
-      :id => id,
-      :to_param => "#{id}",
-      :new_record? => false,
-      :errors => errors_stub
-    )
-
-    options_and_stubs.each do |method,value|
-      stub(m).__send__(method) { value }
+    def as_new_record
+      stub(self).persisted? { false }
+      stub(self).id { nil }
+      self
     end
 
-    yield m if block_given?
-    m
+    def persisted?
+      true
+    end
+
+  end
+
+  module ActiveRecordExtensions
+    
+    def as_new_record
+      self.__send__("id=", nil)
+      super
+    end
+
+    def new_record?
+      !persisted?
+    end
+
+    def connection
+      raise RSpec::Rails::IllegalDataAccessException.new("stubbed models are not allowed to access the database")
+    end
+    
   end
 
   def stub_model(model_class, stubs={})
-    stubs = {:id => next_id}.merge(stubs)
-    model_class.new.tap do |model|
-      model.id = stubs.delete(:id)
-      model.extend Spec::Rails::Mocks::ModelStubber
+    stubs = stubs.reverse_merge(:id => next_id)
+    model_class.new.tap do |m|
+      m.extend ActiveModelExtensions
+      m.extend ActiveRecordExtensions
       stubs.each do |k,v|
-        if model.has_attribute?(k)
-          model[k] = stubs.delete(k)
+        if m.respond_to?("#{k}=")
+          m.send("#{k}=", v)
+        else
+          stub(m).__send__(k) { v }
         end
       end
-      stubs.each do |k,v|
-        stub(model).__send__(k) { v }
-      end
-      yield model if block_given?
+      yield m if block_given?
     end
   end
 
+  @@model_id = 1000
+
+  def next_id
+    @@model_id += 1
+  end
+      
 end
 
 RSpec.configure do |config|
-  config.include RRModelMocks
+  config.include RspecRailsRR
 end
+

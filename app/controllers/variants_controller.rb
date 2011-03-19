@@ -20,7 +20,6 @@ class VariantsController < ApplicationController
     respond_to do |format|
       format.jpg do
         send_file(variant_file_name, :type => "image/jpeg", :disposition => 'inline', :stream => true)
-        @performed_render = true # TODO:why is this required?
       end
     end
   end

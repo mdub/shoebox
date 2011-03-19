@@ -4,9 +4,11 @@ describe VariantsController do
 
   before do 
     @photo = "mock photo"
-    stub(Photo).find(:first, :conditions => {:id => "123"}) { @photo }
+    stub(Photo).find_by_id { @photo }
     stub(@photo).write_variant
-    stub(controller).send_file
+    stub(controller).send_file do |file, options|
+      controller.render :text => "rendering #{file}"
+    end
   end
 
   describe "#show" do

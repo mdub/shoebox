@@ -82,6 +82,7 @@ describe Import do
         @import.execute do |x|
           @completed << x
         end
+        stub(@incomplete_file).execute
       end
 
       it "executes incomplete ImportFiles" do

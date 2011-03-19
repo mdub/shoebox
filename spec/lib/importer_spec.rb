@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+require "importer"
+
 describe Importer do
 
   before do

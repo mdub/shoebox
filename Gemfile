@@ -25,4 +25,5 @@ group :test do
   gem "machinist", "~> 1.0.6"
   # gem "rcov"
   gem "faker"
+  gem "rspec2-rails-views-matchers"
 end

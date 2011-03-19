@@ -31,7 +31,7 @@ describe ImportsHelper do
     
     describe "#import_file_status" do
       it "returns a problematic cross" do
-        import_file_status(@import_file).should have_tag(".problematic", ImportsHelper::FAILED)
+        import_file_status(@import_file).should have_tag(".problematic", :text => ImportsHelper::FAILED)
       end
     end
     
@@ -45,7 +45,7 @@ describe ImportsHelper do
     
     describe "#import_file_status" do
       it "is laid-back" do
-        import_file_status(@import_file).should have_tag(".okay", ImportsHelper::DONE)
+        import_file_status(@import_file).should have_tag(".okay", :text => ImportsHelper::DONE)
       end
     end
     

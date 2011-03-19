@@ -75,7 +75,7 @@ class Photo < ActiveRecord::Base
     if image_tempfile
       self.sha1_digest = Digest::SHA1.hexdigest(image_tempfile.read)
       if image_tempfile.content_type == "image/jpeg"
-        self.timestamp = EXIFR::JPEG.new(image_tempfile.path).date_time
+        self.taken_at = EXIFR::JPEG.new(image_tempfile.path).date_time
       end
     end
   end

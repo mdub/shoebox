@@ -59,7 +59,7 @@ describe Photo do
     
   end
   
-  describe "#timestamp" do
+  describe "#taken_at" do
 
     before do
       ENV['TZ'] = "UTC"
@@ -68,7 +68,7 @@ describe Photo do
 
     it "is derived from image" do
       @photo.save.should be_true
-      @photo.timestamp.should == Time.utc(2008, 1, 13, 15, 4, 42)
+      @photo.taken_at.should == Time.utc(2008, 1, 13, 15, 4, 42)
     end
     
   end
@@ -108,9 +108,9 @@ describe Photo do
     end
     
     before do
-      @photo1 = load_image "safari.png", :timestamp => 1.day.ago
-      @photo2 = load_image "finder.png", :timestamp => 1.month.ago
-      @photo3 = load_image "date.png", :timestamp => 3.minutes.ago
+      @photo1 = load_image "safari.png", :taken_at => 1.day.ago
+      @photo2 = load_image "finder.png", :taken_at => 1.month.ago
+      @photo3 = load_image "date.png", :taken_at => 3.minutes.ago
     end
 
     describe "member" do

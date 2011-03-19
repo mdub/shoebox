@@ -7,11 +7,11 @@ describe PhotosController do
     it "exposes a paginated list of photos" do
       
       @paginated_photos = ["paginated list of photos"].paginate
-      mock(Photo).paginate(:page => "3") do
+      stub(Photo).by_id.stub!.paginate(:page => "3") do
         @paginated_photos
       end
 
-      get :index, :page => 3
+      get :index, :page => "3"
 
       assigns[:photos].should == @paginated_photos
       
@@ -33,7 +33,7 @@ describe PhotosController do
         @subsequent_photos = [stub_model(Photo)]
         stub(@photo).subsequent.stub!.all { @subsequent_photos }
         
-        get :show, :id => @photo.id
+        get :show, :id => @photo.to_param
       end
 
       it "exposes the photo" do

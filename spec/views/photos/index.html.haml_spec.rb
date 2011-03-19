@@ -8,12 +8,11 @@ describe "photos/index" do
       @photos = (1..3).map do
         stub_model(Photo)
       end.paginate(:page => 1)
-      assigns[:photos] = @photos
-      render :action => "photos/index"
+      render
     end
 
     it "displays photo thumbails" do
-      response.should have_tag("ul.photos") do
+      rendered.should have_tag("ul.photos") do
         @photos.each do |photo|
           with_tag("li#photo_#{photo.id} img.thumb") 
         end
@@ -21,9 +20,9 @@ describe "photos/index" do
     end
 
     it "includes links to each photo" do
-      response.should have_tag("ul.photos") do
+      rendered.should have_tag("ul.photos") do
         @photos.each do |photo|
-          with_tag("li#photo_#{photo.id} a[href=?]", "/photos/#{photo.id}")
+          with_tag("li#photo_#{photo.id} a", :with => {:href => "/photos/#{photo.id}"})
         end
       end
     end
