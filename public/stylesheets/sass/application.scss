@@ -65,16 +65,23 @@ h2 {
 }
 
 .controls {
+  overflow: hidden;
+  text-align: center;
   ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    display: inline-block;
+    li {
+      display: inline-block;
+    }
   }
-  #prior {
-    float: left;
-  }
-  #subsequent {
-    float: right;
+  #current {
+    li {
+      background: #666;
+      border: solid #666;
+      border-width: 6px 3px 9px 3px;
+    }
   }
 }
 
