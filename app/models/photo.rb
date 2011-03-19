@@ -31,7 +31,7 @@ class Photo < ActiveRecord::Base
   def self.from_file(filename)
     self.new.tap do |photo|
       photo.image = File.new(filename)
-      if filename.to_str =~ /\.(\w+)$/
+      if filename.to_s =~ /\.(\w+)$/
         photo.image_content_type = Mime::Type.lookup_by_extension($1.downcase).to_s
       end
     end

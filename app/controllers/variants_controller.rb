@@ -35,7 +35,8 @@ class VariantsController < ApplicationController
   end
   
   def find_photo
-    @photo = Photo.find_by_id(params[:photo_id]) || head(:status => :not_found)
+    @photo = Photo.find_by_id(params[:photo_id])
+    @photo ||= head(:status => :not_found)
   end
   
 end

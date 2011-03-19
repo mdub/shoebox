@@ -4,6 +4,10 @@ require 'spec_helper'
 
 describe Photo do
   
+  before(:all) do
+    Photo.delete_all
+  end
+  
   describe "- uploaded" do
 
     before do
@@ -22,7 +26,7 @@ describe Photo do
 
   describe ".from_file" do
     
-    before(:all) do
+    before do
       @photo = Photo.from_file(image_fixture_file("jonah-with-tractor.jpg"))
     end
 
@@ -43,8 +47,9 @@ describe Photo do
 
   describe "#full_filename" do
     
-    before(:all) do
+    before do
       @photo = Photo.from_file(image_fixture_file("jonah-with-tractor.jpg"))
+      @photo.save!
     end
 
     it "returns the absolute file path" do

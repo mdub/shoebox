@@ -3,7 +3,7 @@ require 'spec_helper'
 describe VariantsController do
 
   before do 
-    @photo = "mock photo"
+    @photo = stub_model(Photo, :id => 123)
     stub(Photo).find_by_id { @photo }
     stub(@photo).write_variant
     stub(controller).send_file do |file, options|
