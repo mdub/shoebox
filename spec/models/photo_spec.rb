@@ -41,6 +41,18 @@ describe Photo do
     
   end
 
+  describe "#full_filename" do
+    
+    before(:all) do
+      @photo = Photo.from_file(image_fixture_file("jonah-with-tractor.jpg"))
+    end
+
+    it "returns the absolute file path" do
+      Pathname(@photo.full_filename).should be_absolute
+    end
+    
+  end
+  
   describe "#sha1_digest" do
 
     before do
