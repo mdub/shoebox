@@ -1,8 +1,0 @@
----
-format: 1
-handler:
-  commit: 1e64acd4b660160b9c9b5e355c028e17104836c2
-  branch: master
-lock: false
-repository_url: git://github.com/neerajdotname/admin_data.git
-repository_class: Piston::Git::Repository

@@ -1,20 +1,21 @@
 require "pathname"
 
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 describe Photo do
   
   describe "- uploaded" do
 
     before do
-      upload = ActionController::TestUploadedFile.new("#{fixture_path}/images/ngara-on-train.jpg", "image/jpeg")
-      @photo = Photo.create!(:uploaded_data => upload)
+      upload = File.new("#{fixture_path}/images/ngara-on-train.jpg")
+      @photo = Photo.create!(:image => upload)
     end
 
     it "is stored in /public/system/photos" do
-      @photo.public_filename.should =~ %r{^/system/photos/.*/ngara-on-train\.jpg$}
-      image_file_path = "#{RAILS_ROOT}/public#{@photo.public_filename}"
-      Pathname(image_file_path).should exist
+      image_path = Pathname(@photo.image.path)
+      relative_path = image_path.relative_path_from(Rails.root + "public/system/photos")
+      relative_path.to_s.should =~ %r{^\d{4}/\d{4}/ngara-on-train\.jpg$}
+      image_path.should exist
     end
     
   end
@@ -22,7 +23,7 @@ describe Photo do
   describe ".from_file" do
     
     before(:all) do
-      @photo = Photo.from_file(image_fixture_file("jonah-with-tractor.JPG"))
+      @photo = Photo.from_file(image_fixture_file("jonah-with-tractor.jpg"))
     end
 
     it "derives the content_type" do
@@ -46,12 +47,7 @@ describe Photo do
       @photo = Photo.from_file(image_fixture_file("ngara-on-train.jpg"))
     end
 
-    it "starts empty" do
-      @photo.sha1_digest.should == nil
-    end
-    
-    it "is derived on save" do
-      @photo.save.should be_true
+    it "is derived from image" do
       @photo.sha1_digest.should =~ /^[0-9a-f]{40}$/
     end
     
@@ -70,11 +66,7 @@ describe Photo do
       @photo = Photo.from_file(image_fixture_file("ngara-on-train.jpg"))
     end
 
-    it "starts empty" do
-      @photo.timestamp.should == nil
-    end
-    
-    it "is derived on save" do
+    it "is derived from image" do
       @photo.save.should be_true
       @photo.timestamp.should == Time.utc(2008, 1, 13, 15, 4, 42)
     end

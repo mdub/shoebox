@@ -7,23 +7,23 @@ class ImportFile < ActiveRecord::Base
 
   belongs_to :photo
 
-  named_scope :by_id, {
+  scope :by_id, {
     :order => "id ASC"
   }
 
-  named_scope :complete, {
+  scope :complete, {
     :conditions => ["completed_at IS NOT NULL"]
   }
 
-  named_scope :incomplete, {
+  scope :incomplete, {
     :conditions => ["completed_at IS NULL"]
   }
 
-  named_scope :failed, {
+  scope :failed, {
     :conditions => ["message IS NOT NULL"]
   }
 
-  named_scope :successful, {
+  scope :successful, {
     :conditions => ["message IS NULL"]
   }
 

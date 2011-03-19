@@ -1,16 +1,16 @@
 class Import < ActiveRecord::Base
 
-  named_scope :recent, {
+  scope :recent, {
     :order => "id DESC"
   }
 
   has_many :files, :class_name => "ImportFile", :dependent => :delete_all
 
-  named_scope :complete, {
+  scope :complete, {
     :conditions => ["completed_at IS NOT NULL"]
   }
 
-  named_scope :incomplete, {
+  scope :incomplete, {
     :conditions => ["completed_at IS NULL"]
   }
 

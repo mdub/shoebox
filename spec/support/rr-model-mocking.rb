@@ -1,0 +1,49 @@
+module RRModelMocks
+
+  # Creates a mock object instance for a +model_class+ with common
+  # methods stubbed out. Additional methods may be easily stubbed (via
+  # add_stubs) if +stubs+ is passed.
+  def mock_model(model_class, options_and_stubs = {})
+    m = model_class.new
+    id = next_id
+
+    # our equivalent to Rspecs :errors => ''# stub("errors", :count => 0)
+    stub(errors_stub = Object.new).count{0}
+
+    options_and_stubs.reverse_merge!(
+      :id => id,
+      :to_param => "#{id}",
+      :new_record? => false,
+      :errors => errors_stub
+    )
+
+    options_and_stubs.each do |method,value|
+      stub(m).__send__(method) { value }
+    end
+
+    yield m if block_given?
+    m
+  end
+
+  def stub_model(model_class, stubs={})
+    stubs = {:id => next_id}.merge(stubs)
+    model_class.new.tap do |model|
+      model.id = stubs.delete(:id)
+      model.extend Spec::Rails::Mocks::ModelStubber
+      stubs.each do |k,v|
+        if model.has_attribute?(k)
+          model[k] = stubs.delete(k)
+        end
+      end
+      stubs.each do |k,v|
+        stub(model).__send__(k) { v }
+      end
+      yield model if block_given?
+    end
+  end
+
+end
+
+RSpec.configure do |config|
+  config.include RRModelMocks
+end
